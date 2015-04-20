@@ -1,0 +1,29 @@
+%h1 Listing bracelets
+
+%table
+  %thead
+    %tr
+      %th Clasp
+      %th Casp
+      %th Color position
+      %th Row number
+      %th Price
+      %th
+      %th
+      %th
+
+  %tbody
+    - @bracelets.each do |bracelet|
+      %tr
+        %td= bracelet.clasp
+        %td= bracelet.casp
+        %td= bracelet.color_position_id
+        %td= bracelet.row_number_id
+        %td= bracelet.price
+        %td= link_to 'Show', bracelet
+        %td= link_to 'Edit', edit_bracelet_path(bracelet)
+        %td= link_to 'Destroy', bracelet, :method => :delete, :data => { :confirm => 'Are you sure?' }
+
+%br
+
+= link_to 'New Bracelet', new_bracelet_path

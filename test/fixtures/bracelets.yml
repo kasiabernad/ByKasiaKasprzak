@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  clasp: MyString
+  casp: MyString
+  color_position_id: 1
+  row_number_id: 1
+  price: 1
+
+two:
+  clasp: MyString
+  casp: MyString
+  color_position_id: 1
+  row_number_id: 1
+  price: 1

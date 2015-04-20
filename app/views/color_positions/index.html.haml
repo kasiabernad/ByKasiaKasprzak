@@ -1,0 +1,23 @@
+%h1 Listing color_positions
+
+%table
+  %thead
+    %tr
+      %th Color
+      %th Position
+      %th
+      %th
+      %th
+
+  %tbody
+    - @color_positions.each do |color_position|
+      %tr
+        %td= color_position.color_id
+        %td= color_position.position
+        %td= link_to 'Show', color_position
+        %td= link_to 'Edit', edit_color_position_path(color_position)
+        %td= link_to 'Destroy', color_position, :method => :delete, :data => { :confirm => 'Are you sure?' }
+
+%br
+
+= link_to 'New Color position', new_color_position_path

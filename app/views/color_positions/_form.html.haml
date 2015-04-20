@@ -1,0 +1,16 @@
+= form_for @color_position do |f|
+  - if @color_position.errors.any?
+    #error_explanation
+      %h2= "#{pluralize(@color_position.errors.count, "error")} prohibited this color_position from being saved:"
+      %ul
+        - @color_position.errors.full_messages.each do |msg|
+          %li= msg
+
+  .field
+    = f.label :color_id
+    = f.number_field :color_id
+  .field
+    = f.label :position
+    = f.number_field :position
+  .actions
+    = f.submit 'Save'

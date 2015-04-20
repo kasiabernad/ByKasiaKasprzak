@@ -1,0 +1,21 @@
+%h1 Listing row_numbers
+
+%table
+  %thead
+    %tr
+      %th Row number
+      %th
+      %th
+      %th
+
+  %tbody
+    - @row_numbers.each do |row_number|
+      %tr
+        %td= row_number.row_number
+        %td= link_to 'Show', row_number
+        %td= link_to 'Edit', edit_row_number_path(row_number)
+        %td= link_to 'Destroy', row_number, :method => :delete, :data => { :confirm => 'Are you sure?' }
+
+%br
+
+= link_to 'New Row number', new_row_number_path

@@ -1,0 +1,37 @@
+= form_for @bracelet do |f|
+  - if @bracelet.errors.any?
+    #error_explanation
+      %h2= "#{pluralize(@bracelet.errors.count, "error")} prohibited this bracelet from being saved:"
+      %ul
+        - @bracelet.errors.full_messages.each do |msg|
+          %li= msg
+
+  .field
+    = f.label :clasp
+    = f.text_field :clasp
+  .field
+    = f.label :casp
+    = f.text_field :casp
+  %table
+    - @bracelet.color_positions.each_slice(6).to_a.each do |t|
+      %tr
+        - t.each do|x|
+          %td
+            - x.position
+  %table
+    - @colors.each do |color|
+      %tr
+        %td
+          = color.try(:name)
+        %td{style:"background-color:##{color.hex}"}
+  .field
+    = f.label :color_position_id
+    = f.number_field :color_position_id
+  .field
+    = f.label :row_number_id
+    = f.number_field :row_number_id
+  .field
+    = f.label :price
+    = f.number_field :price
+  .actions
+    = f.submit 'Save'

@@ -1,0 +1,12 @@
+%p#notice= notice
+
+%p
+  %b Color:
+  = @color_position.color_id
+%p
+  %b Position:
+  = @color_position.position
+
+= link_to 'Edit', edit_color_position_path(@color_position)
+\|
+= link_to 'Back', color_positions_path
