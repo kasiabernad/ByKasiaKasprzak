@@ -16,14 +16,9 @@
     - @bracelet.color_positions.each_slice(6).to_a.each do |t|
       %tr
         - t.each do|x|
-          %td
+          %td{onclick:"changeColor(#{x.id})", id: "cp-#{x.id}", style:"background-color:##{x.color.hex}"}
             - x.position
-  %table
-    - @colors.each do |color|
-      %tr
-        %td
-          = color.try(:name)
-        %td{style:"background-color:##{color.hex}"}
+  = render 'pallete'
   .field
     = f.label :color_position_id
     = f.number_field :color_position_id

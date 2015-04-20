@@ -1,5 +1,7 @@
 class BraceletsController < ApplicationController
   before_action :set_bracelet, only: [:show, :edit, :update, :destroy]
+  before_action :set_current_color, only: [:pallete, :edit, :change]
+  before_action :set_color_position, only: [:change]
   # GET /bracelets
   # GET /bracelets.json
   
@@ -18,9 +20,19 @@ class BraceletsController < ApplicationController
     @bracelet = Bracelet.new
   end
 
+  def pallete
+    @colors = Color.all
+  end
+
+  def change
+    @color_position.color = @current_color
+    @color_position.save!
+  end
+
   # GET /bracelets/1/edit
   def edit
     @colors = Color.all
+  
   end
 
   # POST /bracelets
@@ -64,6 +76,20 @@ class BraceletsController < ApplicationController
 
   private
     # Use callbacks to share common setup or constraints between actions.
+
+    def set_color_position
+      @color_position = ColorPosition.find(params[:position_id])
+    end
+
+    def set_current_color
+      @current_color = Color.find_by_hex(params[:current_color].upcase) if params[:current_color]
+      
+      if !@current_color
+          @current_color = Color.first
+      end
+
+    end
+
     def set_bracelet
       @bracelet = Bracelet.includes(:color_positions).find(params[:id])
     end

@@ -1,0 +1,1 @@
+$("#pallete-full").replaceWith("<%= escape_javascript(render(:partial => 'bracelets/pallete')) %>");

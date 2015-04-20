@@ -5,7 +5,12 @@ Rails.application.routes.draw do
 
   resources :color_positions
 
-  resources :bracelets
+  resources :bracelets do
+    collection do
+      get 'pallete'
+      get 'change'
+    end
+  end
 
   resources :colors
 
