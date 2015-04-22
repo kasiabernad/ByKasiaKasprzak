@@ -12,12 +12,15 @@
   .field
     = f.label :casp
     = f.text_field :casp
-  %table
-    - @bracelet.color_positions.each_slice(6).to_a.each do |t|
+  - (0..@bracelet.rows_count).each do |row_index|
+    %table
       %tr
-        - t.each do|x|
-          %td{onclick:"changeColor(#{x.id})", id: "cp-#{x.id}", style:"background-color:##{x.color.hex}"}
+        - if ((row_index % 2 ) == 0)
+          %td{class:"no-border"}
+        - @bracelet.positions_in_first_look_for_iteration(row_index).to_a.each do |x|
+          %td{onclick:"changeColor(#{x.id})", id: "cp-#{x.id}", style:"background-color:##{x.color.hex};"}
             - x.position
+        
   = render 'pallete'
   .field
     = f.label :color_position_id
