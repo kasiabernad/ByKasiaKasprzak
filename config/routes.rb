@@ -1,8 +1,6 @@
 Rails.application.routes.draw do
   resources :orders
 
-  resources :row_numbers
-
   resources :color_positions
 
   resources :bracelets do

@@ -7,29 +7,10 @@
           %li= msg
 
   .field
-    = f.label :clasp
-    = f.text_field :clasp
+    = f.label :row_count
+    = f.number_field :row_count
   .field
-    = f.label :casp
-    = f.text_field :casp
-  - (0..@bracelet.rows_count).each do |row_index|
-    %table
-      %tr
-        - if ((row_index % 2 ) == 0)
-          %td{class:"no-border"}
-        - @bracelet.positions_in_first_look_for_iteration(row_index).to_a.each do |x|
-          %td{onclick:"changeColor(#{x.id})", id: "cp-#{x.id}", style:"background-color:##{x.color.hex};"}
-            - x.position
-        
-  = render 'pallete'
-  .field
-    = f.label :color_position_id
-    = f.number_field :color_position_id
-  .field
-    = f.label :row_number_id
-    = f.number_field :row_number_id
-  .field
-    = f.label :price
-    = f.number_field :price
+    = f.label :height
+    = f.number_field :height
   .actions
     = f.submit 'Save'

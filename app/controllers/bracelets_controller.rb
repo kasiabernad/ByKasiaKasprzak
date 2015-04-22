@@ -32,7 +32,6 @@ class BraceletsController < ApplicationController
   # GET /bracelets/1/edit
   def edit
     @colors = Color.all
-  
   end
 
   # POST /bracelets
@@ -41,8 +40,8 @@ class BraceletsController < ApplicationController
     @bracelet = Bracelet.new(bracelet_params)
     respond_to do |format|
       if @bracelet.save
-        format.html { redirect_to @bracelet, notice: 'Bracelet was successfully created.' }
-        format.json { render :show, status: :created, location: @bracelet }
+        format.html { redirect_to edit_bracelet_path(@bracelet), notice: 'Bracelet was successfully created.' }
+        format.json { render :edit, status: :created, location: @bracelet }
       else
         format.html { render :new }
         format.json { render json: @bracelet.errors, status: :unprocessable_entity }
@@ -96,6 +95,6 @@ class BraceletsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def bracelet_params
-      params.require(:bracelet).permit(:clasp, :casp, :color_position_id, :row_number_id, :price)
+      params.require(:bracelet).permit(:clasp, :casp, :color_position_id, :row_count, :price, :height)
     end
 end

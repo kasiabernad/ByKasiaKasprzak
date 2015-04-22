@@ -11,16 +11,17 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150418173712) do
+ActiveRecord::Schema.define(version: 20150422124649) do
 
   create_table "bracelets", force: true do |t|
     t.string   "clasp"
     t.string   "casp"
     t.integer  "color_position_id"
-    t.integer  "row_number_id"
     t.integer  "price"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "height"
+    t.integer  "row_count"
   end
 
   create_table "color_positions", force: true do |t|
