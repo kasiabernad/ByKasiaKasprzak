@@ -1,22 +1,22 @@
 Rails.application.routes.draw do
-  devise_for :users
-  resources :users
-
-  resources :orders
-
-  resources :color_positions
-
-  resources :bracelets do
-    collection do
-      get 'pallete'
-      get 'change'
+  devise_for :users, :controllers => { registrations: 'users/registrations' }
+  
+  devise_scope :user do
+    resources :users
+    resources :orders
+    resources :colors
+    resources :color_positions
+    resources :bracelets do
+      collection do
+        get 'pallete'
+        get 'change'
+      end
     end
   end
 
-  resources :colors
 
-  get 'welcome/index'
-  root 'welcome#index'
+    get 'welcome/index'
+    root 'welcome#index'
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
@@ -71,5 +71,5 @@ Rails.application.routes.draw do
   #     # (app/controllers/admin/products_controller.rb)
   #     resources :products
   #   end
-  
+
 end
