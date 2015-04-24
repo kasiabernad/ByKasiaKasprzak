@@ -1,4 +1,4 @@
-class ColorPositionsController < ApplicationController
+class Admin::ColorPositionsController < ApplicationController
   before_action :set_color_position, only: [:show, :edit, :update, :destroy]
   
   # GET /color_positions

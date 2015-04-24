@@ -1,14 +1,16 @@
 Rails.application.routes.draw do
-  devise_for :admins, :controllers => { registrations: 'admins/registrations' }
-  devise_for :users, :controllers => { registrations: 'users/registrations' }
-
+  devise_for :admins, :controllers => { registrations: 'admin/registrations' }
+  devise_for :users, :controllers => { registrations: 'creator/registrations' }
 
   get 'welcome/index'
   root 'welcome#index'
-  
-  devise_scope :admin do
-    resources :admins
+
+  namespace :admin do
+    root to: 'dashboard#index'
+
+    resource :dashboard
     resources :users
+    resources :admins
     resources :orders
     resources :colors
     resources :color_positions
@@ -19,8 +21,8 @@ Rails.application.routes.draw do
       end
     end
   end
-  
-  devise_scope :user do
+
+  namespace :creator do
     resources :users
     resources :admins
     resources :orders

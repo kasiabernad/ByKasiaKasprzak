@@ -1,0 +1,27 @@
+= form_for @bracelet do |f|
+  - if @bracelet.errors.any?
+    #error_explanation
+      %h2= "#{pluralize(@bracelet.errors.count, "error")} prohibited this bracelet from being saved:"
+      %ul
+        - @bracelet.errors.full_messages.each do |msg|
+          %li= msg
+  = "W poprzednim kroku wybrałaś długość i szerokość bransoletki. Jeśli chcesz zmienić długość lub szerokość bransoletki kliknij tutaj. Wszystkie zmiany z tego widoku nie zostaną zapisane:"
+  = link_to 'New Bracelet', new_bracelet_path
+  - (0..@bracelet.height).each do |row_index|
+    %table
+      %tr
+        - if ((row_index % 2 ) == 0)
+          %td{class:"no-border"}
+        - @bracelet.positions_in_first_look_for_iteration(row_index).to_a.each do |x|
+          %td{onclick:"changeColor(#{x.id})", id: "cp-#{x.id}", style:"background-color:##{x.color.hex};"}
+            - x.position
+        
+  = render 'pallete'
+  .field
+    = f.label :color_position_id
+    = f.number_field :color_position_id
+  .field
+    = f.label :price
+    = f.number_field :price
+  .actions
+    = f.submit 'Save'

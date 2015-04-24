@@ -1,0 +1,12 @@
+%p#notice= notice
+
+%p
+  %b Bracelet:
+  = @order.bracelet_id
+%p
+  %b Price:
+  = @order.price
+
+= link_to 'Edit', edit_admin_order_path(@order)
+\|
+= link_to 'Back', admin_orders_path

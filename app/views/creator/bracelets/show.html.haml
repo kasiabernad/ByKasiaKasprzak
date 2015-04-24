@@ -1,0 +1,31 @@
+%p#notice= notice
+
+
+%p
+  %b ID
+  = @bracelet.id
+%p
+%p
+  %b Clasp:
+  = @bracelet.clasp
+%p
+  %b Casp:
+  = @bracelet.casp
+%p
+  %b Color position:
+  - @bracelet.color_positions.each do |color_position|
+    = color_position.position
+    = color_position.color.name
+%p
+  %b Row count:
+  = @bracelet.row_count
+%p
+  %b Height:
+  = @bracelet.height
+%p
+  %b Price:
+  = @bracelet.price
+
+= link_to 'Edit', edit_bracelet_path(@bracelet)
+\|
+= link_to 'Back', bracelets_path
