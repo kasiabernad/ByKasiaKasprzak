@@ -1,6 +1,7 @@
 class Bracelet < ActiveRecord::Base
   has_many :color_positions
   has_one :row_number
+  belongs_to :user
   after_create :create_color_positions
 
   def create_color_positions
