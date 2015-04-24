@@ -1,8 +1,28 @@
 Rails.application.routes.draw do
+  devise_for :admins, :controllers => { registrations: 'admins/registrations' }
   devise_for :users, :controllers => { registrations: 'users/registrations' }
+
+
+  get 'welcome/index'
+  root 'welcome#index'
+  
+  devise_scope :admin do
+    resources :admins
+    resources :users
+    resources :orders
+    resources :colors
+    resources :color_positions
+    resources :bracelets do
+      collection do
+        get 'pallete'
+        get 'change'
+      end
+    end
+  end
   
   devise_scope :user do
     resources :users
+    resources :admins
     resources :orders
     resources :colors
     resources :color_positions
@@ -15,8 +35,7 @@ Rails.application.routes.draw do
   end
 
 
-    get 'welcome/index'
-    root 'welcome#index'
+    
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
