@@ -1,4 +1,4 @@
-class Admin::ColorsController < ApplicationController
+class Admin::ColorsController < Admin::AdminController
   before_action :set_color, only: [:show, :edit, :update, :destroy]
 
   # GET /colors

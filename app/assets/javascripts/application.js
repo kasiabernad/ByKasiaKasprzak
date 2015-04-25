@@ -20,14 +20,14 @@ function setAsSelectedColor() {
   var td = event.target
   var rgb = td.style.backgroundColor.match(/\d+/g);
   var hex = String('0' + Number(rgb[0]).toString(16)).slice(-2) + String('0' + Number(rgb[1]).toString(16)).slice(-2) + String('0' + Number(rgb[2]).toString(16)).slice(-2);
-  $.ajax('/bracelets/pallete.js?current_color=' + hex);
+  $.ajax('creator/bracelets/pallete.js?current_color=' + hex);
 }
 
 function changeColor(position_id) {
   var rgb = $('#current-color').css('background-color').match(/\d+/g);
   var hex = String('0' + Number(rgb[0]).toString(16)).slice(-2) + String('0' + Number(rgb[1]).toString(16)).slice(-2) + String('0' + Number(rgb[2]).toString(16)).slice(-2);
 
-  var endpoint = '/bracelets/change.js?current_color=' + hex + '&position_id=' + position_id;
+  var endpoint = 'creator/bracelets/change.js?current_color=' + hex + '&position_id=' + position_id;
 
   $.ajax(endpoint);
 

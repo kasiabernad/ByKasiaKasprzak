@@ -5,6 +5,7 @@
     %tr
       %th Color
       %th Position
+      %th Bracelet
       %th
       %th
       %th
@@ -14,10 +15,11 @@
       %tr
         %td= color_position.color_id
         %td= color_position.position
-        %td= link_to 'Show', color_position
-        %td= link_to 'Edit', edit_color_position_path(color_position)
-        %td= link_to 'Destroy', color_position, :method => :delete, :data => { :confirm => 'Are you sure?' }
+        %td= color_position.bracelet_id
+        %td= link_to 'Show', creator_color_position_path(color_position)
+        %td= link_to 'Edit', edit_creator_color_position_path(color_position)
+        %td= link_to 'Destroy', creator_color_position_path(color_position), :method => :delete, :data => { :confirm => 'Are you sure?' }
 
 %br
 
-= link_to 'New Color position', new_color_position_path
+= link_to 'New Color position', new_creator_color_position_path

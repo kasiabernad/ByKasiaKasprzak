@@ -1,4 +1,4 @@
-= form_for @bracelet do |f|
+= form_for [:creator, @bracelet] do |f|
   - if @bracelet.errors.any?
     #error_explanation
       %h2= "#{pluralize(@bracelet.errors.count, "error")} prohibited this bracelet from being saved:"
@@ -6,7 +6,7 @@
         - @bracelet.errors.full_messages.each do |msg|
           %li= msg
   = "W poprzednim kroku wybrałaś długość i szerokość bransoletki. Jeśli chcesz zmienić długość lub szerokość bransoletki kliknij tutaj. Wszystkie zmiany z tego widoku nie zostaną zapisane:"
-  = link_to 'New Bracelet', new_bracelet_path
+  = link_to 'New Bracelet', new_creator_bracelet_path
   - (0..@bracelet.height).each do |row_index|
     %table
       %tr

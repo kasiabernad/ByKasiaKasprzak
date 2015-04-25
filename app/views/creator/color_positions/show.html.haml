@@ -6,7 +6,10 @@
 %p
   %b Position:
   = @color_position.position
+%p
+  %b Bracelet_id
+  = @color_position.bracelet_id
 
-= link_to 'Edit', edit_color_position_path(@color_position)
+= link_to 'Edit', edit_creator_color_position_path(@color_position)
 \|
-= link_to 'Back', color_positions_path
+= link_to 'Back', :back

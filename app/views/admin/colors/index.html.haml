@@ -14,10 +14,10 @@
       %tr
         %td= color.name
         %td= color.picture
-        %td= link_to 'Show', color
-        %td= link_to 'Edit', edit_color_path(color)
-        %td= link_to 'Destroy', color, :method => :delete, :data => { :confirm => 'Are you sure?' }
+        %td= link_to 'Show', creator_color_path(color)
+        %td= link_to 'Edit', edit_creator_color_path(color)
+        %td= link_to 'Destroy', creator_color_path(color), :method => :delete, :data => { :confirm => 'Are you sure?' }
 
 %br
 
-= link_to 'New Color', new_color_path
+= link_to 'New Color', new_creator_color_path

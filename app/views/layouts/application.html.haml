@@ -9,9 +9,10 @@
   %body
     -if signed_in?
       - if current_user
-        = render 'devise/menu/user_items'
+        = render 'creator/devise/menu/user_items'
       - if admin_signed_in?
-        = render 'devise/menu/admin_user_items'
+        = render 'admin/devise/menu/admin_user_items'
     - else
-      = render 'devise/menu/registration_items'
+      - if !current_page? new_admin_session_path
+        = render 'creator/devise/menu/registration_items'
     = yield

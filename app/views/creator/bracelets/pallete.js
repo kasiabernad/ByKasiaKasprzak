@@ -1,1 +1,1 @@
-$("#pallete-full").replaceWith("<%= escape_javascript(render(:partial => 'bracelets/pallete')) %>");
+$("#pallete-full").replaceWith("<%= escape_javascript(render(:partial => 'creator/bracelets/pallete')) %>");

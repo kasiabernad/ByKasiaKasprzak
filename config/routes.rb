@@ -24,7 +24,6 @@ Rails.application.routes.draw do
 
   namespace :creator do
     resources :users
-    resources :admins
     resources :orders
     resources :colors
     resources :color_positions

@@ -1,4 +1,4 @@
-class Admin::BraceletsController < ApplicationController
+class Admin::BraceletsController < Admin::AdminController
   before_action :set_bracelet, only: [:show, :edit, :update, :destroy]
   before_action :set_current_color, only: [:pallete, :edit, :change]
   before_action :set_color_position, only: [:change]
