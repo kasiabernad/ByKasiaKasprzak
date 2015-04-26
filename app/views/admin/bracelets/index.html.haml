@@ -5,7 +5,6 @@
     %tr
       %th Clasp
       %th Casp
-      %th Color position
       %th Row count
       %th Height
       %th Price
@@ -18,14 +17,13 @@
       %tr
         %td= bracelet.clasp
         %td= bracelet.casp
-        %td= bracelet.color_position_id
         %td= bracelet.row_count
         %td= bracelet.height
         %td= bracelet.price
-        %td= link_to 'Show', bracelet
-        %td= link_to 'Edit', edit_bracelet_path(bracelet)
-        %td= link_to 'Destroy', bracelet, :method => :delete, :data => { :confirm => 'Are you sure?' }
+        %td= link_to 'Show', admin_bracelet_path(bracelet)
+        %td= link_to 'Edit', edit_admin_bracelet_path(bracelet)
+        %td= link_to 'Destroy', admin_bracelet_path(bracelet), :method => :delete, :data => { :confirm => 'Are you sure?' }
 
 %br
 
-= link_to 'New Bracelet', new_bracelet_path
+= link_to 'New Bracelet', new_admin_bracelet_path

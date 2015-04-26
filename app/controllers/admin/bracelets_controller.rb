@@ -13,6 +13,7 @@ class Admin::BraceletsController < Admin::AdminController
   # GET /bracelets/1
   # GET /bracelets/1.json
   def show
+    @color_positions = @bracelet.color_positions
   end
 
   # GET /bracelets/new
@@ -37,14 +38,15 @@ class Admin::BraceletsController < Admin::AdminController
   # POST /bracelets
   # POST /bracelets.json
   def create
+    @users = User.all
     @bracelet = Bracelet.new(bracelet_params)
     respond_to do |format|
       if @bracelet.save
-        format.html { redirect_to edit_bracelet_path(@bracelet), notice: 'Bracelet was successfully created.' }
-        format.json { render :edit, status: :created, location: @bracelet }
+        format.html { redirect_to edit_admin_bracelet_path(@bracelet), notice: 'Bracelet was successfully created.' }
+        format.json { render :edit, status: :created, location: admin_bracelet_path(@bracelet) }
       else
         format.html { render :new }
-        format.json { render json: @bracelet.errors, status: :unprocessable_entity }
+        format.json { render json: admin_bracelet_path(@bracelet).errors, status: :unprocessable_entity }
       end
     end
   end
@@ -54,11 +56,11 @@ class Admin::BraceletsController < Admin::AdminController
   def update
     respond_to do |format|
       if @bracelet.update(bracelet_params)
-        format.html { redirect_to @bracelet, notice: 'Bracelet was successfully updated.' }
-        format.json { render :show, status: :ok, location: @bracelet }
+        format.html { redirect_to admin_bracelet_path(@bracelet), notice: 'Bracelet was successfully updated.' }
+        format.json { render :show, status: :ok, location: admin_bracelet_path(@bracelet) }
       else
         format.html { render :edit }
-        format.json { render json: @bracelet.errors, status: :unprocessable_entity }
+        format.json { render json: admin_bracelet_path(@bracelet).errors, status: :unprocessable_entity }
       end
     end
   end
@@ -68,7 +70,7 @@ class Admin::BraceletsController < Admin::AdminController
   def destroy
     @bracelet.destroy
     respond_to do |format|
-      format.html { redirect_to bracelets_url, notice: 'Bracelet was successfully destroyed.' }
+      format.html { redirect_to admin_bracelets_url, notice: 'Bracelet was successfully destroyed.' }
       format.json { head :no_content }
     end
   end
@@ -95,6 +97,6 @@ class Admin::BraceletsController < Admin::AdminController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def bracelet_params
-      params.require(:bracelet).permit(:clasp, :casp, :color_position_id, :row_count, :price, :height)
+      params.require(:bracelet).permit(:clasp, :casp, :color_position_id, :row_count, :price, :height, :user_id)
     end
 end

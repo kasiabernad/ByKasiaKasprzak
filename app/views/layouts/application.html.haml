@@ -13,6 +13,6 @@
       - if admin_signed_in?
         = render 'admin/devise/menu/admin_user_items'
     - else
-      - if !current_page? new_admin_session_path
+      - if !current_page? new_admin_session_path && new_admin_registration_path
         = render 'creator/devise/menu/registration_items'
     = yield

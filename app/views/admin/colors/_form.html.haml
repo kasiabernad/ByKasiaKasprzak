@@ -1,4 +1,4 @@
-= form_for [:creator,@color] do |f|
+= simple_form_for [:admin,@color] do |f|
   - if @color.errors.any?
     #error_explanation
       %h2= "#{pluralize(@color.errors.count, "error")} prohibited this color from being saved:"
@@ -12,5 +12,8 @@
   .field
     = f.label :picture
     = f.text_field :picture
+  .field
+    = f.label 'Dostępność'
+    = f.input_field :available, as: :select, hint: 'You cannot change your username.'
   .actions
     = f.submit 'Save'

@@ -25,7 +25,7 @@ Rails.application.routes.draw do
   namespace :creator do
     resources :users
     resources :orders
-    resources :colors
+    resources :colors, only: [:show, :index]
     resources :color_positions
     resources :bracelets do
       collection do

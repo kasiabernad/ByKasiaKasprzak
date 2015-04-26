@@ -21,7 +21,7 @@ class Creator::BraceletsController < Creator::CreatorController
   end
 
   def pallete
-    @colors = Color.all
+    @colors = Color.available
   end
 
   def change
@@ -31,7 +31,7 @@ class Creator::BraceletsController < Creator::CreatorController
 
   # GET /bracelets/1/edit
   def edit
-    @colors = Color.all
+    @colors = Color.available
   end
 
   # POST /bracelets

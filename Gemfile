@@ -28,6 +28,7 @@ gem 'spring',        group: :development
 gem "haml-rails", "~> 0.9"
 gem 'pry_debug'
 gem 'devise'
+gem 'simple_form'
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'

@@ -6,7 +6,8 @@
 %p
   %b Picture:
   = @color.picture
-
-= link_to 'Edit', edit_creator_color_path(@color)
+%p
+  %b Available
+  = @color.available
 \|
 = link_to 'Back', :back

@@ -17,6 +17,7 @@ class Creator::UsersController < Creator::CreatorController
  #    @user = User.new
  #  end
  #
+ 
   # GET /users/1/edit
   def edit
   end

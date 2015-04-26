@@ -1,4 +1,4 @@
-= form_for @bracelet do |f|
+= simple_form_for [:admin, @bracelet] do |f|
   - if @bracelet.errors.any?
     #error_explanation
       %h2= "#{pluralize(@bracelet.errors.count, "error")} prohibited this bracelet from being saved:"
@@ -12,5 +12,9 @@
   .field
     = f.label :height
     = f.number_field :height
+  .field
+    = f.label "Wybierz Użytkownika"
+    %br/
+    = f.association :user, label_method: :first_name, collection: User.all, prompt: "Wybierz użytkownika"
   .actions
     = f.submit 'Save'

@@ -1,4 +1,4 @@
-= form_for @color_position do |f|
+= form_for [:admin, @color_position] do |f|
   - if @color_position.errors.any?
     #error_explanation
       %h2= "#{pluralize(@color_position.errors.count, "error")} prohibited this color_position from being saved:"

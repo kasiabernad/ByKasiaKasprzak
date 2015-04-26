@@ -7,7 +7,7 @@ class Bracelet < ActiveRecord::Base
   def create_color_positions
     y = [self.height, self.row_count].compact.inject(:*)
     (1..y).each do |x|
-      colorPosition = ColorPosition.create(position: x, color_id: 1)
+      colorPosition = ColorPosition.create(position: x, color_id: 2)
       colorPosition.bracelet = self
       colorPosition.save!
     end 
@@ -22,5 +22,16 @@ class Bracelet < ActiveRecord::Base
     return self.color_positions.slice(idx, number_of_columns)
   
   end
-
+  # def sum_price
+  #   if self.color_position.color = 1
+  #     price_1 = 0
+  #   if self.color_position.color = 2
+  #     price_1 = 5
+  #   if self.color_position.color = 3
+  #     price_1 = 7
+  #   if self.color_position.color = 4
+  #     price_1 = 10
+  #   end
+  #   self.sum_price = price_1
+  # end
 end

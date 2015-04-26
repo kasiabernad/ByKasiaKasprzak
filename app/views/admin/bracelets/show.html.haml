@@ -1,31 +1,40 @@
 %p#notice= notice
-
-
-%p
-  %b ID
-  = @bracelet.id
-%p
-%p
-  %b Clasp:
+.div-left
+  %table
+    %tr
+      - @color_positions.each do |x|
+        %td{style:"background-color:##{x.color.hex};"}
+          - x.position
+  = 'Podgląd wzoru'
+  - (0..@bracelet.height).each do |row_index|
+    %table
+      %tr
+        - if ((row_index % 2 ) == 0)
+          %td.small-no-border
+        - @bracelet.positions_in_first_look_for_iteration(row_index).to_a.each do |x|
+          %td.small{style:"background-color:##{x.color.hex};"}
+            - x.position
+.div-right          
+  %br
+  Zapięcie:
   = @bracelet.clasp
-%p
-  %b Casp:
+  %br
+  Zakończenie:
   = @bracelet.casp
-%p
-  %b Color position:
-  - @bracelet.color_positions.each do |color_position|
-    = color_position.position
-    = color_position.color.name
-%p
-  %b Row count:
+  %br
+  Ilość koralików w rzędzie
   = @bracelet.row_count
-%p
-  %b Height:
+  %br
+  Długość bransoletki
   = @bracelet.height
-%p
-  %b Price:
+  %br
+  Cena
   = @bracelet.price
-
-= link_to 'Edit', edit_bracelet_path(@bracelet)
-\|
-= link_to 'Back', bracelets_path
+  %br
+  Uzytkownik
+  = @bracelet.user.first_name
+  %br
+  = link_to 'Edit', edit_admin_bracelet_path(@bracelet)
+  \|
+  = link_to 'Back', :back
+  
