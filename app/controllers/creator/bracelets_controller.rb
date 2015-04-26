@@ -1,6 +1,6 @@
 class Creator::BraceletsController < Creator::CreatorController
-  before_action :set_bracelet, only: [:show, :edit, :update, :destroy]
-  before_action :set_current_color, only: [:pallete, :edit, :change]
+  before_action :set_bracelet, only: [:show, :edit, :update, :destroy, :changerow]
+  before_action :set_current_color, only: [:pallete, :edit, :change, :changerow]
   before_action :set_color_position, only: [:change]
   # GET /bracelets
   # GET /bracelets.json
@@ -27,6 +27,19 @@ class Creator::BraceletsController < Creator::CreatorController
   def change
     @color_position.color = @current_color
     @color_position.save!
+  end
+
+  def changerow
+
+    @row_index = params[:row_idx].to_i
+    
+    @color_positions = @bracelet.positions_in_first_look_for_iteration(@row_index)
+    
+    @color_positions.each do |color_position|
+      color_position.color = @current_color
+      color_position.save
+    end
+
   end
 
   # GET /bracelets/1/edit

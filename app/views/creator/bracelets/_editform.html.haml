@@ -9,12 +9,12 @@
   = link_to 'New Bracelet', new_creator_bracelet_path
   - (0..@bracelet.height).each do |row_index|
     %table
+      = render 'single_row', :@color_positions => @bracelet.positions_in_first_look_for_iteration(row_index).to_a, :@row_index => row_index
+  %table
+    - (0..@bracelet.height).each do |row_index|
       %tr
-        - if ((row_index % 2 ) == 0)
-          %td{class:"no-border"}
-        - @bracelet.positions_in_first_look_for_iteration(row_index).to_a.each do |x|
-          %td{onclick:"changeColor(#{x.id})", id: "cp-#{x.id}", style:"background-color:##{x.color.hex};"}
-            - x.position
+        %td{class: "fill-row-#{row_index}", onclick:"fillRow(#{row_index}, #{@bracelet.id})"}
+          = "•"
         
   = render 'pallete'
   .field
