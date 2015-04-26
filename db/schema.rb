@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150425191459) do
+ActiveRecord::Schema.define(version: 20150426125036) do
 
   create_table "admins", force: true do |t|
     t.string   "email",                  default: "", null: false
@@ -42,6 +42,7 @@ ActiveRecord::Schema.define(version: 20150425191459) do
     t.integer  "row_count"
     t.integer  "user_id"
     t.boolean  "draft",             default: false
+    t.integer  "order_id"
   end
 
   create_table "color_positions", force: true do |t|

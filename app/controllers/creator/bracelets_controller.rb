@@ -96,6 +96,6 @@ class Creator::BraceletsController < Creator::CreatorController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def bracelet_params
-      params.require(:bracelet).permit(:clasp, :casp, :color_position_id, :row_count, :price, :height, :user_id)
+      params.require(:bracelet).permit(:clasp, :casp, :color_position_id, :row_count, :price, :height, :user_id, :order_id)
     end
 end

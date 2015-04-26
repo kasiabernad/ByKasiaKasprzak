@@ -45,3 +45,11 @@ function rgb2hex(rgb) {
 function hex(x) {
   return isNaN(x) ? "00" : hexDigits[(x - x % 16) / 16] + hexDigits[x % 16];
  }
+function PrintDiv(name, file) { 
+ var divToPrint = document.getElementById(name);
+ var popupWin = window.open('', '_blank', 'width=600,height=600');
+ popupWin.document.open();
+ popupWin.document.title = file
+ popupWin.document.write('<html><style>td {border: 1px solid;width:10px;height:10px}  .hidden-on-print {visibility: hidden;display: none;}</style><body>' + divToPrint.innerHTML + '</body></html>');
+ popupWin.document.close();
+}

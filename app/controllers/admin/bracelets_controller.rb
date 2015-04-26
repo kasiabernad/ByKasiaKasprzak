@@ -14,6 +14,7 @@ class Admin::BraceletsController < Admin::AdminController
   # GET /bracelets/1.json
   def show
     @color_positions = @bracelet.color_positions
+    @colors = @bracelet.colors.uniq
   end
 
   # GET /bracelets/new

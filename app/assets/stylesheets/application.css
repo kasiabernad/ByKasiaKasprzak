@@ -30,6 +30,11 @@ td.small{
   height: 3px;
   border:1px solid black; 
 }
+td.admin-small{
+  width:3px;
+  height: 3px;
+  border:1px solid black;
+}
     
 td.small-no-border{
     width: 0px !important;
@@ -50,3 +55,7 @@ td.small-no-border{
   margin-left: 20%;
   position:relative;
 }
+@media print {
+  body {
+    background: #FFF;
+ }
