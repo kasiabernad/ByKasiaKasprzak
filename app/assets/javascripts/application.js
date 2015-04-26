@@ -34,6 +34,16 @@ function fillRow (row_idx, bracelet_id) {
 
 }
 
+function fillTable (bracelet_id) {
+  var rgb = $('#current-color').css('background-color').match(/\d+/g);
+  var hex = String('0' + Number(rgb[0]).toString(16)).slice(-2) + String('0' + Number(rgb[1]).toString(16)).slice(-2) + String('0' + Number(rgb[2]).toString(16)).slice(-2);
+
+  var endpoint = '/creator/bracelets/changeentiretable.js?current_color=' + hex + '&id=' + bracelet_id;
+
+  $.ajax(endpoint);
+
+}
+
 function changeColor(position_id) {
   var rgb = $('#current-color').css('background-color').match(/\d+/g);
   var hex = String('0' + Number(rgb[0]).toString(16)).slice(-2) + String('0' + Number(rgb[1]).toString(16)).slice(-2) + String('0' + Number(rgb[2]).toString(16)).slice(-2);

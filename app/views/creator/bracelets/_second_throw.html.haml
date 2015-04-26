@@ -1,0 +1,4 @@
+#entire_table_second{style:'margin-left:15px;float:left'}
+  - (0..@bracelet.height).each do |row_index|
+    %table
+      = render 'single_row_second_throw', :@color_positions => @bracelet.positions_in_second_look_for_iteration(row_index).to_a, :@row_index => row_index

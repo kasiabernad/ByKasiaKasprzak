@@ -7,7 +7,8 @@ class Bracelet < ActiveRecord::Base
   after_create :create_color_positions
 
   def create_color_positions
-    y = [self.height, self.row_count].compact.inject(:*)
+    z = [self.height, self.row_count].compact.inject(:*)
+    y = z + (self.height * 0.5)
     (1..y).each do |x|
       colorPosition = ColorPosition.create(position: x, color_id: 2)
       colorPosition.bracelet = self
@@ -24,6 +25,28 @@ class Bracelet < ActiveRecord::Base
     return self.color_positions.slice(idx, number_of_columns)
   
   end
+  
+  
+  def positions_in_second_look_for_iteration iteration
+    x = row_count % 2? row_count + 2 : rown_count + 1
+    row_width = x * 0.5
+    positions = positions_in_first_look_for_iteration(iteration)
+    
+    if !positions
+      return nil
+    end
+    
+    median = positions.count * 0.5
+    
+    from_idx = row_width * 0.5 - 1
+    if iteration % 2 == 0
+      from_idx = from_idx - 1
+    end
+    
+    return positions.slice(from_idx, row_width)
+  
+  end
+  
   # def sum_price
   #   if self.color_position.color = 1
   #     price_1 = 0

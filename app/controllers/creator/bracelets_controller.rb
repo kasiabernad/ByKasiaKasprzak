@@ -1,6 +1,6 @@
 class Creator::BraceletsController < Creator::CreatorController
-  before_action :set_bracelet, only: [:show, :edit, :update, :destroy, :changerow]
-  before_action :set_current_color, only: [:pallete, :edit, :change, :changerow]
+  before_action :set_bracelet, only: [:show, :edit, :update, :destroy, :changerow, :changeentiretable]
+  before_action :set_current_color, only: [:pallete, :edit, :change, :changerow, :changeentiretable]
   before_action :set_color_position, only: [:change]
   # GET /bracelets
   # GET /bracelets.json
@@ -40,6 +40,15 @@ class Creator::BraceletsController < Creator::CreatorController
       color_position.save
     end
 
+  end
+  
+  def changeentiretable
+    
+    @bracelet.color_positions.each do |cp|
+      cp.color = @current_color
+      cp.save
+    end
+    
   end
 
   # GET /bracelets/1/edit

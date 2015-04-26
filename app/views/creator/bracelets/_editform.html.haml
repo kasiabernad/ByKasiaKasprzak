@@ -7,16 +7,20 @@
           %li= msg
   = "W poprzednim kroku wybrałaś długość i szerokość bransoletki. Jeśli chcesz zmienić długość lub szerokość bransoletki kliknij tutaj. Wszystkie zmiany z tego widoku nie zostaną zapisane:"
   = link_to 'New Bracelet', new_creator_bracelet_path
-  - (0..@bracelet.height).each do |row_index|
-    %table
-      = render 'single_row', :@color_positions => @bracelet.positions_in_first_look_for_iteration(row_index).to_a, :@row_index => row_index
   %table
+    %tr
+      %td{class: "fill-entire_table", style:'width:150px',onclick:"fillTable(#{@bracelet.id})"}
+        %center
+          = "wypelnij"
+  = render 'first_throw'
+  .tools{style:'margin-left:15px;display:table;float:left'}
     - (0..@bracelet.height).each do |row_index|
-      %tr
-        %td{class: "fill-row-#{row_index}", onclick:"fillRow(#{row_index}, #{@bracelet.id})"}
-          = "•"
-        
-  = render 'pallete'
+      %table
+        %tr
+          %td{class: "fill-row-#{row_index}", onclick:"fillRow(#{row_index}, #{@bracelet.id})"}
+
+  = render 'pallete' 
+  = render 'second_throw'
   .field
     = f.label :color_position_id
     = f.number_field :color_position_id

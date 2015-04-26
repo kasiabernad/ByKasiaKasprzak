@@ -18,6 +18,8 @@ Rails.application.routes.draw do
       collection do
         get 'pallete'
         get 'change'
+        get 'changerow'
+        get 'changeentiretable'
       end
     end
   end
@@ -32,6 +34,7 @@ Rails.application.routes.draw do
         get 'pallete'
         get 'change'
         get 'changerow'
+        get 'changeentiretable'
       end
     end
   end

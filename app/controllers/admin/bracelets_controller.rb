@@ -31,6 +31,19 @@ class Admin::BraceletsController < Admin::AdminController
     @color_position.save!
   end
 
+  def changerow
+
+    @row_index = params[:row_idx].to_i
+    
+    @color_positions = @bracelet.positions_in_first_look_for_iteration(@row_index)
+    
+    @color_positions.each do |color_position|
+      color_position.color = @current_color
+      color_position.save
+    end
+
+  end
+
   # GET /bracelets/1/edit
   def edit
     @colors = Color.all

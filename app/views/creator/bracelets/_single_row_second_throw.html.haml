@@ -1,0 +1,9 @@
+%tr{id: "cp-single-row-#{@row_index}"}
+  - if ((@row_index % 2 ) == 0)
+    - can = @color_positions.first
+  - else
+    - can = @color_positions.last
+  - @color_positions.each do |x|
+    - cla = can == x ? 'small' : 'normal'
+    %td{onclick:"changeColor(#{x.id})", id: "cp-#{x.id}", style:"background-color:##{x.color.hex};", class: "cp-row-#{@row_index} #{cla}"}
+      - x.position
