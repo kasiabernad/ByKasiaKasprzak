@@ -31,6 +31,7 @@ Rails.application.routes.draw do
       collection do
         get 'pallete'
         get 'change'
+        get 'changerow'
       end
     end
   end
