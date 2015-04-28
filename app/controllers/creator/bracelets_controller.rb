@@ -13,6 +13,7 @@ class Creator::BraceletsController < Creator::CreatorController
   # GET /bracelets/1
   # GET /bracelets/1.json
   def show
+    @colors = @bracelet.colors.uniq
   end
 
   # GET /bracelets/new

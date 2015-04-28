@@ -1,4 +1,4 @@
-= form_for [:admin, @bracelet] do |f|
+= simple_form_for [:admin, @bracelet] do |f|
   - if @bracelet.errors.any?
     #error_explanation
       %h2= "#{pluralize(@bracelet.errors.count, "error")} prohibited this bracelet from being saved:"
@@ -18,10 +18,12 @@
         
   = render 'pallete'
   .field
-    = f.label :color_position_id
-    = f.number_field :color_position_id
+    = f.input :casp, label: "Wybierz kolor wykończenia bransoletki", collection: ["Srebrne","Złote","Miedziane"]
   .field
-    = f.label :price
-    = f.number_field :price
+    = f.input :clasp, label: "Wybierz zapięcie", collection: ["karabińczyk","toogle"]
+  = 'Cena'
+  = @bracelet.sum_price
+  %br
+  %br
   .actions
     = f.submit 'Save'

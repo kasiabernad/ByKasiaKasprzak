@@ -1,32 +1,54 @@
 %p#notice= notice
-.div-left
-  = 'Podgląd wzoru'
-  - (0..@bracelet.height).each do |row_index|
-    %table
-      %tr
-        - if ((row_index % 2 ) == 0)
-          %td.small-no-border
-        - @bracelet.positions_in_first_look_for_iteration(row_index).to_a.each do |x|
-          %td.small{style:"background-color:##{x.color.hex};"}
-            - x.position
-.div-right          
+.panel        
   %br
   Zapięcie:
   = @bracelet.clasp
   %br
-  Zakończenie:
+  Wykończenie:
   = @bracelet.casp
   %br
   Ilość koralików w rzędzie
   = @bracelet.row_count
   %br
-  Długość bransoletki
-  = @bracelet.height
+  Długość bransoletki (cm)
+  = @bracelet.height.to_s + ' cm'
   %br
-  Cena
-  = @bracelet.price
+  Kolory użyte w bransoletce
+  %table
+    - @colors.each do |color|
+      %tr
+        %td
+          = color.try(:name)
+        %td.color-to-select{style:"background-color:##{color.hex}"}
+  %br
+  = 'Cena netto'
+  = number_to_currency(@bracelet.sum_price)
+  %br
+  %br
+  = 'Cena brutto'
+  = number_to_currency(@bracelet.sum_price * 1.23)
+  %br
   %br
   = link_to 'Edit', edit_creator_bracelet_path(@bracelet)
   \|
   = link_to 'Back', :back
-  
+  %br
+  = 'Podgląd wzoru'
+  %div{:style => "transform:rotate(90deg); -webkit-transform:rotate(90deg); \r\n-moz-transform:rotate(90deg); -o-transform:rotate(90deg);display: inline-block;margin-left:30%;margin-top:-30%"}
+    - a = (@bracelet.height * 4.55).ceil
+    - (0..a).each do |row_index|
+      %table
+        %tr
+          - if ((row_index % 2 ) == 0)
+            %td.small-no-border
+          - @bracelet.positions_in_first_look_for_iteration(row_index).to_a.each do |x|
+            %td.small{style:"background-color:##{x.color.hex};"}
+              - x.position
+  %br
+  %div{:style => "transform:rotate(90deg); -webkit-transform:rotate(90deg); \r\n-moz-transform:rotate(90deg); -o-transform:rotate(90deg);display: inline-block;margin-left:40%;margin-top:-50%"}
+    - a = (@bracelet.height * 4.55).ceil
+    - (0..a).each do |row_index|
+      %table
+        %tr
+          - @bracelet.positions_in_second_look_for_iteration(row_index).to_a.each do |x|
+            %td.small{style:"background-color:##{x.color.hex};"}

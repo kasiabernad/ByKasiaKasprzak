@@ -8,6 +8,7 @@
   = 'Zamówienie nr ' + @bracelet.order.id.to_s
   %br
   Kolory użyte w bransoletce:
+  = @colors.count
   %table
     - @colors.each do |color|
       %tr
@@ -20,36 +21,52 @@
         - row.each do |x|
           %td.admin-small{style:"background-color:##{x.color.hex};"}
             - x.position
-.div-left            
-  = 'Podgląd wzoru'
-  - (0..@bracelet.height).each do |row_index|
-    %table
-      %tr
-        - if ((row_index % 2 ) == 0)
-          %td.small-no-border
-        - @bracelet.positions_in_first_look_for_iteration(row_index).to_a.each do |x|
-          %td.small{style:"background-color:##{x.color.hex};"}
-            - x.position
-.div-right          
+.panel
+  .div-right          
+    %br
+    Zapięcie:
+    = @bracelet.clasp
+    %br
+    Wykończenie:
+    = @bracelet.casp
+    %br
+    Ilość koralików w rzędzie
+    = @bracelet.row_count
+    %br
+    Długość bransoletki
+    = @bracelet.height.to_s + ' cm'
+    %br
+    Uzytkownik
+    = @bracelet.user.first_name
+    %br
+    = 'Cena netto'
+    = number_to_currency(@bracelet.sum_price)
+    %br
+    = 'Cena brutto'
+    = number_to_currency(@bracelet.sum_price * 1.23)
+    %br
+    = link_to 'Edit', edit_admin_bracelet_path(@bracelet)
+    \|
+    = link_to 'Back', :back
+    %br
+    = 'Podgląd wzoru'
+  %div{:style => "transform:rotate(90deg); -webkit-transform:rotate(90deg); \r\n-moz-transform:rotate(90deg); -o-transform:rotate(90deg);display: inline-block;margin-left:40%;margin-top:-30%"}
+    - a = (@bracelet.height * 4.55).ceil
+    - (0..a).each do |row_index|
+      %table
+        %tr
+          - if ((row_index % 2 ) == 0)
+            %td.small-no-border
+          - @bracelet.positions_in_first_look_for_iteration(row_index).to_a.each do |x|
+            %td.small{style:"background-color:##{x.color.hex};"}
+              - x.position
   %br
-  Zapięcie:
-  = @bracelet.clasp
-  %br
-  Zakończenie:
-  = @bracelet.casp
-  %br
-  Ilość koralików w rzędzie
-  = @bracelet.row_count
-  %br
-  Długość bransoletki
-  = @bracelet.height
-  %br
-  Cena
-  = @bracelet.price
-  %br
-  Uzytkownik
-  = @bracelet.user.first_name
-  = link_to 'Edit', edit_admin_bracelet_path(@bracelet)
-  \|
-  = link_to 'Back', :back
+  %div{:style => "transform:rotate(90deg); -webkit-transform:rotate(90deg); \r\n-moz-transform:rotate(90deg); -o-transform:rotate(90deg);display: inline-block;margin-left:42%;margin-top:-60%"}
+    - a = (@bracelet.height * 4.55).ceil
+    - (0..a).each do |row_index|
+      %table
+        %tr
+          - @bracelet.positions_in_second_look_for_iteration(row_index).to_a.each do |x|
+            %td.small{style:"background-color:##{x.color.hex};"}
+
   

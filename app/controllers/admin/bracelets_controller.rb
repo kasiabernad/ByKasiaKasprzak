@@ -17,13 +17,13 @@ class Admin::BraceletsController < Admin::AdminController
     @colors = @bracelet.colors.uniq
   end
 
-  # GET /bracelets/new
+  # GET /bracelets/new 
   def new
     @bracelet = Bracelet.new
   end
 
   def pallete
-    @colors = Color.all
+    @colors = Color.available
   end
 
   def change

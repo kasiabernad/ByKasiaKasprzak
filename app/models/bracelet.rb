@@ -7,10 +7,11 @@ class Bracelet < ActiveRecord::Base
   after_create :create_color_positions
 
   def create_color_positions
-    z = [self.height, self.row_count].compact.inject(:*)
-    y = z + (self.height * 0.5)
+    a = (self.height * 4.55)
+    z = [a, self.row_count].compact.inject(:*)
+    y = z + (a * 0.5)
     (1..y).each do |x|
-      colorPosition = ColorPosition.create(position: x, color_id: 2)
+      colorPosition = ColorPosition.create(position: x, color_id: 1)
       colorPosition.bracelet = self
       colorPosition.save!
     end 
@@ -47,16 +48,63 @@ class Bracelet < ActiveRecord::Base
   
   end
   
-  # def sum_price
-  #   if self.color_position.color = 1
-  #     price_1 = 0
-  #   if self.color_position.color = 2
-  #     price_1 = 5
-  #   if self.color_position.color = 3
-  #     price_1 = 7
-  #   if self.color_position.color = 4
-  #     price_1 = 10
-  #   end
-  #   self.sum_price = price_1
-  # end
+  def height_price
+    height_price = 0
+    if self.height <= 15
+      height_price = -3
+    end
+    if self.height > 19
+      height_price = 3
+    end
+    return height_price
+  end
+  
+  def width_price
+    width_price = 0
+    if self.row_count >= 8
+      width_price = 5
+    end
+    if self.row_count >= 10
+      width_price = 10
+    end
+    if self.row_count >= 12
+      width_price = 15
+    end
+    return width_price
+  end
+  
+  def color_presence color
+    return self.color_positions.where(color: color).count
+  end
+  
+  def dominate_colors
+    result = []
+    self.colors.uniq.each do |color|
+    
+      if self.color_presence(color) > 10
+        result.push(color)
+      end
+    end
+    
+    return result
+  end
+  
+  def color_price
+    color_price = 0
+    if self.dominate_colors.count >=2
+      color_price = 2
+    end
+    if self.dominate_colors.count > 3
+      color_price = 5
+    end
+    if self.dominate_colors.count > 5
+      color_price = 7
+    end
+    return color_price
+  end
+  
+  def sum_price
+    self.price = 25
+    return self.price + color_price + height_price + width_price
+  end
 end

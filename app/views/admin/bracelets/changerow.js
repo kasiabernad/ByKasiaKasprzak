@@ -1,0 +1,1 @@
+$('#cp-single-row-' + '<%= @row_index %>').replaceWith("<%= escape_javascript(render :partial => 'creator/bracelets/single_row') %>");
