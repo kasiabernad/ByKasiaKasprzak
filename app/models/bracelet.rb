@@ -5,6 +5,8 @@ class Bracelet < ActiveRecord::Base
   has_one :order
   belongs_to :user
   after_create :create_color_positions
+  validates :height, :inclusion => { :in => 5..25, :message => "The height must be between 5 and 25" }
+  validates :row_count, :inclusion => { :in => 5..15, :message => "The height must be between 5 and 15" }
 
   def create_color_positions
     a = (self.height * 4.55)

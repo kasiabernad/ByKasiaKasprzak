@@ -2,6 +2,7 @@ class Creator::BraceletsController < Creator::CreatorController
   before_action :set_bracelet, only: [:show, :edit, :update, :destroy, :changerow, :changeentiretable]
   before_action :set_current_color, only: [:pallete, :edit, :change, :changerow, :changeentiretable]
   before_action :set_color_position, only: [:change]
+  
   # GET /bracelets
   # GET /bracelets.json
   

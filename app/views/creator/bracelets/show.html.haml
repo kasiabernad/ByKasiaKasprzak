@@ -50,5 +50,11 @@
     - (0..a).each do |row_index|
       %table
         %tr
+          - if ((row_index % 2 ) == 0)
+            - can = @bracelet.positions_in_second_look_for_iteration(row_index).to_a.first
+          - else
+            - can = @bracelet.positions_in_second_look_for_iteration(row_index).to_a.last  
           - @bracelet.positions_in_second_look_for_iteration(row_index).to_a.each do |x|
-            %td.small{style:"background-color:##{x.color.hex};"}
+            - cla = can == x ? 'small_second' : 'normal_second'
+            %td{style:"background-color:##{x.color.hex};", class: "#{cla}"}
+              - x.position
