@@ -77,15 +77,15 @@ class Creator::BraceletsController < Creator::CreatorController
   # PATCH/PUT /bracelets/1
   # PATCH/PUT /bracelets/1.json
   def update
-    respond_to do |format|
-      if @bracelet.update(bracelet_params)
-        format.html { redirect_to creator_bracelet_path(@bracelet), notice: 'Bracelet was successfully updated.' }
-        format.json { render :show, status: :ok, location: @bracelet }
-      else
-        format.html { render :edit }
-        format.json { render json: creator_bracelet_path(@bracelet).errors, status: :unprocessable_entity }
+      respond_to do |format|
+        if @bracelet.update(bracelet_params)
+          format.html { redirect_to admin_bracelet_path(@bracelet), notice: 'Bracelet was successfully updated.' }
+          format.json { render :show, status: :ok, location: admin_bracelet_path(@bracelet) }
+        else
+          format.html { render :edit }
+          format.json { render json: admin_bracelet_path(@bracelet).errors, status: :unprocessable_entity }
+        end
       end
-    end
   end
 
   # DELETE /bracelets/1

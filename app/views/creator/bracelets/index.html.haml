@@ -1,31 +1,51 @@
-%h1 Listing bracelets
-
-%table
-  %thead
-    %tr
-      %th Clasp
-      %th Casp
-      %th Color position
-      %th Row count
-      %th Height
-      %th Price
-      %th
-      %th
-      %th
-
-  %tbody
-    - @bracelets.each do |bracelet|
-      %tr
-        %td= bracelet.clasp
-        %td= bracelet.casp
-        %td= bracelet.color_position_id
-        %td= bracelet.row_count
-        %td= bracelet.height
-        %td= bracelet.price
-        %td= link_to 'Show', creator_bracelet_path(bracelet)
-        %td= link_to 'Edit', edit_creator_bracelet_path(bracelet)
-        %td= link_to 'Destroy', creator_bracelet_path(bracelet), :method => :delete, :data => { :confirm => 'Are you sure?' }
-
+- @bracelets.each do |bracelet|
+  - if bracelet.order.present?
+    %h1 Bransoletki zamówione
+    %table
+      %thead
+        %tr
+          %th Clasp
+          %th Casp
+          %th Row count
+          %th Height
+          %th Price
+          %th order
+          %th
+          %th
+          %th
+        %tbody
+          %tr
+            %td= bracelet.clasp
+            %td= bracelet.casp
+            %td= bracelet.row_count
+            %td= bracelet.height
+            %td= bracelet.sum_price
+            %td= bracelet.order.id.to_s
+            %td= link_to 'Show', creator_bracelet_path(bracelet)
+            %td= link_to 'Edit', edit_creator_bracelet_path(bracelet)
+            %td= link_to 'Destroy', creator_bracelet_path(bracelet), :method => :delete, :data => { :confirm => 'Are you sure?' }
+  - else
+    %h1 Drafty
+    %table
+      %thead
+        %tr
+          %th Clasp
+          %th Casp
+          %th Row count
+          %th Height
+          %th Price
+          %th
+          %th
+          %th
+        %tbody
+          %tr
+            %td= bracelet.clasp
+            %td= bracelet.casp
+            %td= bracelet.row_count
+            %td= bracelet.height
+            %td= bracelet.sum_price
+            %td= link_to 'Show', creator_bracelet_path(bracelet)
+            %td= link_to 'Edit', edit_creator_bracelet_path(bracelet)
+            %td= link_to 'Destroy', creator_bracelet_path(bracelet), :method => :delete, :data => { :confirm => 'Are you sure?' }
 %br
-
 = link_to 'New Bracelet', new_creator_bracelet_path

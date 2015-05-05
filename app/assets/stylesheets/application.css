@@ -13,16 +13,17 @@
  *= require_tree .
  *= require_self
  */
+td,tr,table,div{
+    padding:1;
+    margin:0;
+  }
+/* Class of TD */
 td{
   width: 5px;
   height: 5px;
   border:1px solid black;
 }
-td,tr,table,div{
-    padding:1;
-    margin:0;
-  }
-table td.no-border{
+td.no-border{
   width: 1px !important;
   height: 5px;
   border: 0px solid white !important;
@@ -31,17 +32,17 @@ table td.no-border{
 td.small{
   width:1px;
   height: 3px;
-  border:1px solid grey; 
+  border:1px solid black; 
 }
 td.small_second{
   width:0px;
   height: 0px;
-  border:1px solid grey; 
+  border:1px solid black; 
 }
 td.normal_second{
   width:2px;
   height: 3px;
-  border:1px solid grey; 
+  border:1px solid black; 
 }
 td.admin-small{
   width:3px;
@@ -54,13 +55,17 @@ td.small-no-border{
     height: 0px;
     border: 0px solid white !important; 
 }
-    
+/* END CLASS OF TD */
+
+/* COLOR AVAILIBILITY*/
 .dostepny{
   color:red;
 }
 .niedostepny{
   color:gray;
 }
+
+/* FORMS */
 .div-left{
   float:left;
 }
@@ -81,7 +86,7 @@ td.small-no-border{
      -moz-box-shadow: 0 1px 2px rgba(0,0,0,.05);
           box-shadow: 0 1px 2px rgba(0,0,0,.05);
 }
-}
+
 @media print {
   body {
     background: #FFF;

@@ -109,4 +109,29 @@ class Bracelet < ActiveRecord::Base
     self.price = 25
     return self.price + color_price + height_price + width_price
   end
+  
+  def pattern
+    result = Hash.new
+    index = 0
+    counter = 0
+    hash_position = 0
+    current_color = self.color_positions.first.color
+    self.color_positions.each do |cp|
+      if cp.color == current_color
+        counter = counter + 1
+      end
+      index = index + 1
+      next_position = self.color_positions[index]
+      if !next_position.present? || next_position.color != current_color 
+        result[hash_position]= {'color' => current_color, 'count' => counter}
+        counter = 0
+        hash_position = hash_position + 1
+        if next_position.present?
+          current_color = next_position.color
+        end
+      end
+    end
+    
+    return result
+  end
 end

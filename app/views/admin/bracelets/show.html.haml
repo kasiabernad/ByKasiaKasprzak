@@ -5,7 +5,10 @@
   %br
   = 'Bransoletka użytkownika ' + @bracelet.user.first_name
   %br
-  = 'Zamówienie nr ' + @bracelet.order.id.to_s
+  - if @bracelet.order.present?
+    = 'Zamówienie nr ' + @bracelet.order.id.to_s
+  - else
+    Ta bransoletka nie jest jeszcze zamówiona
   %br
   Kolory użyte w bransoletce:
   = @colors.count
@@ -16,11 +19,22 @@
           = color.try(:name)
         %td.color-to-select{style:"background-color:##{color.hex}"}
   %table
-    - @bracelet.color_positions.in_groups_of(50,false) do |row|
+    - hash = @bracelet.pattern
+    - hash.keys.sort.each do |key|
+      - binding.pry
+      - value = hash[key]
       %tr
-        - row.each do |x|
-          %td.admin-small{style:"background-color:##{x.color.hex};"}
-            - x.position
+        %td.admin-small{style:"background-color:##{value['color'].hex};"}
+        %td 
+          = "#{value['color'].name}"
+        %td
+          = "#{value['count']}"
+    / %table
+/       - @bracelet.color_positions.in_groups_of(50,false) do |row|
+/         %tr
+/           - row.each do |x|
+/             %td.admin-small{style:"background-color:##{x.color.hex};"}
+/               - x.position
 .panel
   .div-right          
     %br
@@ -66,7 +80,11 @@
     - (0..a).each do |row_index|
       %table
         %tr
+          - if ((row_index % 2 ) == 0)
+            - can = @bracelet.positions_in_second_look_for_iteration(row_index).to_a.first
+          - else
+            - can = @bracelet.positions_in_second_look_for_iteration(row_index).to_a.last  
           - @bracelet.positions_in_second_look_for_iteration(row_index).to_a.each do |x|
-            %td.small{style:"background-color:##{x.color.hex};"}
-
-  
+            - cla = can == x ? 'small_second' : 'normal_second'
+            %td{style:"background-color:##{x.color.hex};", class: "#{cla}"}
+              - x.position

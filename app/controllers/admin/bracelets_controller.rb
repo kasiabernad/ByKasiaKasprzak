@@ -68,15 +68,19 @@ class Admin::BraceletsController < Admin::AdminController
   # PATCH/PUT /bracelets/1
   # PATCH/PUT /bracelets/1.json
   def update
-    respond_to do |format|
-      if @bracelet.update(bracelet_params)
-        format.html { redirect_to admin_bracelet_path(@bracelet), notice: 'Bracelet was successfully updated.' }
-        format.json { render :show, status: :ok, location: admin_bracelet_path(@bracelet) }
-      else
-        format.html { render :edit }
-        format.json { render json: admin_bracelet_path(@bracelet).errors, status: :unprocessable_entity }
-      end
+    if @bracelet.colors.uniq.count > 7
+      redirect_to edit_creator_bracelet_path(@bracelet), notice: 'Użyłeś za dużo kolorów. Maksymalna ilość kolorów w bransoletce to 7'
+      return
     end
+      respond_to do |format|
+        if @bracelet.update(bracelet_params)
+          format.html { redirect_to admin_bracelet_path(@bracelet), notice: 'Bracelet was successfully updated.' }
+          format.json { render :show, status: :ok, location: admin_bracelet_path(@bracelet) }
+        else
+          format.html { render :edit }
+          format.json { render json: admin_bracelet_path(@bracelet).errors, status: :unprocessable_entity }
+        end
+      end
   end
 
   # DELETE /bracelets/1
