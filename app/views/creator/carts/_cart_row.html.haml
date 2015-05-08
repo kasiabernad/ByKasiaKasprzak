@@ -1,0 +1,20 @@
+.well
+  .row
+    .col-xs-8
+      %h4= bracelet.id
+    .col-xs-4
+      = form_for [:creator, order_item], remote: true do |f|
+        %h4.text-right
+          Unit Price:
+          %span{:style => "color: green"}= number_to_currency order_item.unit_price
+        .row
+          .col-xs-4
+            = f.number_field :quantity, value: order_item.quantity.to_i, class: "form-control", min: 1
+            = f.hidden_field :bracelet_id, value: bracelet.id
+          .col-xs-8.text-right
+            .btn-group
+              = f.submit "Update Quantity", class: "btn btn-primary"
+              = link_to "Delete", creator_order_item_path(order_item), { data: { confirm: "Are you sure you wish to delete the product '#{order_item.bracelet.id}' from your cart?" }, method: :delete, remote: true, class: "btn btn-primary"}
+        %h4.text-right
+          Total Price:
+          %span{:style => "color: green"}= number_to_currency order_item.total_price

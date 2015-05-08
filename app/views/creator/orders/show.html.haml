@@ -1,12 +1,27 @@
-%p#notice= notice
+Łączna cena zamówienia:
+%span{:style => "color: green"}= number_to_currency current_order.subtotal
+%br
+= current_order.order_status.name
+%hr
+%hr
+- @order_items.each do |order_item|
+  Bransoletka nr
+  = order_item.bracelet.id.to_i
+  %br
+  Cena za jedną szt.
+  = number_to_currency order_item.unit_price
+  %br
+  Ilość
+  = order_item.quantity.to_i
+  %br
+  Cena łączna
+  %span{:style => "color: green"}= number_to_currency order_item.total_price
+  %br
+  %hr
+- if current_order.order_status == 1
+  = form_for [:creator, @order] do |f|
+    = f.hidden_field :order_status_id, :value => 2
+    .actions
+      = f.submit 'ZŁóż zamówienie'
 
-%p
-  %b Bracelet:
-  = @order.bracelet_id
-%p
-  %b Price:
-  = @order.price
-
-= link_to 'Edit', edit_creator_order_path(@order)
-\|
-= link_to 'Back', :back
+  

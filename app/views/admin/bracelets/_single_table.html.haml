@@ -2,5 +2,5 @@
   - if ((@entire_table % 2 ) == 0)
     %td{class:"no-border"}
   - @color_positions.each do |x|
-    %td{onclick:"changeColor(#{x.id})", id: "cp-#{x.id}", style:"background-color:##{x.color.hex};", class: "cp-row-#{@entire_table}"}
+    %td{onclick:"adchangeColor(#{x.id})", id: "cp-#{x.id}", style:"background-color:##{x.color.hex};", class: "cp-row-#{@entire_table}"}
       - x.position

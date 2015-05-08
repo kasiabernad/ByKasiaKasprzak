@@ -1,29 +1,65 @@
 = simple_form_for [:admin, @bracelet] do |f|
+  = notice
   - if @bracelet.errors.any?
     #error_explanation
       %h2= "#{pluralize(@bracelet.errors.count, "error")} prohibited this bracelet from being saved:"
       %ul
         - @bracelet.errors.full_messages.each do |msg|
           %li= msg
-  = "W poprzednim kroku wybrałaś długość i szerokość bransoletki. Jeśli chcesz zmienić długość lub szerokość bransoletki kliknij tutaj. Wszystkie zmiany z tego widoku nie zostaną zapisane:"
-  = link_to 'New Bracelet', new_admin_bracelet_path
-  - (0..@bracelet.height).each do |row_index|
-    %table
-      %tr
-        - if ((row_index % 2 ) == 0)
-          %td{class:"no-border"}
-        - @bracelet.positions_in_first_look_for_iteration(row_index).to_a.each do |x|
-          %td{onclick:"changeColor(#{x.id})", id: "cp-#{x.id}", style:"background-color:##{x.color.hex};"}
-            - x.position
-        
-  = render 'pallete'
+  %br
+  %br
+  = '1. Wybierz kolor'
+  %br
+  = '2. Wypełnij wszystko klikając na przycisk "wypełnij"(może to potrwać chwilę), wypełnij poszczególne wiersze klikając na ikonki lub wypełnij poszczególne komórki klikając na komórki'
+  %br
+  = '3. Stwórz swój wzór. Jeśli chcesz powtarzalny schemat na bransoletce wykonaj jeden schemat, resztę wzoru pozostaw białym.'
+  %br
+  = '4. Obserwuj zmiany na symulatorze bransoletki'
+  %br
+  = '5. Wybierz końcówki i zapięcie'
+  %br
+  = '6. Podsumuj swój projekt'
+  %br
+  %br
+  = 'Twoja początkowa cena dla wybranej długości i szerokości bransoletki to:'
+  %br
+  = 'Cena netto'
+  = number_to_currency(@bracelet.sum_price)
+  = 'Cena brutto'
+  = number_to_currency(@bracelet.sum_price * 1.23)
+  %br
+  = "Jeśli chcesz zmienić długość i szerokość bransoletki zrób to zanim stworzysz wzór! Jeśli się cofniesz, wszystkie zmiany z tego widoku nie zostaną zapisane."
+  = link_to 'Zmień długość i szerokość bransoletki', new_admin_bracelet_path
+  %br
+  %br
+  = render 'pallete' 
+  %table
+    %tr
+      %td{class: "fill-entire_table", style:'width:150px',onclick:"adfillTable(#{@bracelet.id})"}
+        %center
+          = "wypełnij"
+  = render 'first_throw'
+  .tools{style:'margin-left:15px;display:table;float:left'}
+    - a = (@bracelet.height * 4.55) - 1
+    - (0..a).each do |row_index|
+      %table
+        %tr
+          %td{class: "fill-row-#{row_index}", style:'background-image:url("/assets/stock_bucketfill.png");background-size:cover', onclick:"adfillRow(#{row_index}, #{@bracelet.id})"}
+
+
+  = render 'second_throw'
   .field
     = f.input :casp, label: "Wybierz kolor wykończenia bransoletki", collection: ["Srebrne","Złote","Miedziane"]
   .field
     = f.input :clasp, label: "Wybierz zapięcie", collection: ["karabińczyk","toogle"]
-  = 'Cena'
-  = @bracelet.sum_price
+  = 'Cena netto'
+  = number_to_currency(@bracelet.sum_price)
+  = 'Cena brutto'
+  = number_to_currency(@bracelet.sum_price * 1.23)
   %br
+  %button 
+    = link_to "Przelicz cenę", edit_admin_bracelet_path(@bracelet), :method => :get
   %br
   .actions
-    = f.submit 'Save'
+    = f.submit 'Zapisz i złóż zamówienie później'
+    / = link_to 'Złóż zamówienie'

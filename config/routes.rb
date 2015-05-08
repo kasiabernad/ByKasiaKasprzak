@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+
+
   devise_for :admins, :controllers => { registrations: 'admin/registrations' }
   devise_for :users, :controllers => { registrations: 'creator/registrations' }
 
@@ -25,10 +27,22 @@ Rails.application.routes.draw do
   end
 
   namespace :creator do
+    get 'order_items/create'
+    get 'order_items/update'
+    get 'order_items/destroy'
+    get 'carts/show'
+    post 'orders/change_order_status'
     resources :users
     resources :orders
+    resources :order_status
     resources :colors, only: [:show, :index]
     resources :color_positions
+    resources :order_items, only: [:create, :update, :destroy] do
+      collection do
+        get 'cart_row'
+        get 'shopping_cart'
+      end
+    end
     resources :bracelets do
       collection do
         get 'pallete'

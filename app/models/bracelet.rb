@@ -1,5 +1,6 @@
 class Bracelet < ActiveRecord::Base
   has_many :color_positions
+  has_many :order_items
   has_many :colors, through: :color_positions
   has_one :row_number
   has_one :order

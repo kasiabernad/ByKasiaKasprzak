@@ -8,6 +8,8 @@ class Admin::BraceletsController < Admin::AdminController
   
   def index
     @bracelets = Bracelet.all
+    @bracelets_with_order = @bracelets.reject { |b| b.order.blank? }
+    @bracelets_without_order = @bracelets.reject { |b| b.order.present? }
   end
 
   # GET /bracelets/1
@@ -32,7 +34,6 @@ class Admin::BraceletsController < Admin::AdminController
   end
 
   def changerow
-
     @row_index = params[:row_idx].to_i
     
     @color_positions = @bracelet.positions_in_first_look_for_iteration(@row_index)
@@ -41,16 +42,24 @@ class Admin::BraceletsController < Admin::AdminController
       color_position.color = @current_color
       color_position.save
     end
-
   end
-
+  
+  def changeentiretable
+    @bracelet.color_positions.each do |cp|
+      cp.color = @current_color
+      cp.save
+    end
+  end
+  
   # GET /bracelets/1/edit
+  
   def edit
     @colors = Color.all
   end
 
   # POST /bracelets
   # POST /bracelets.json
+  
   def create
     @users = User.all
     @bracelet = Bracelet.new(bracelet_params)
@@ -67,6 +76,7 @@ class Admin::BraceletsController < Admin::AdminController
 
   # PATCH/PUT /bracelets/1
   # PATCH/PUT /bracelets/1.json
+  
   def update
     if @bracelet.colors.uniq.count > 7
       redirect_to edit_creator_bracelet_path(@bracelet), notice: 'Użyłeś za dużo kolorów. Maksymalna ilość kolorów w bransoletce to 7'
@@ -81,7 +91,7 @@ class Admin::BraceletsController < Admin::AdminController
           format.json { render json: admin_bracelet_path(@bracelet).errors, status: :unprocessable_entity }
         end
       end
-  end
+    end
 
   # DELETE /bracelets/1
   # DELETE /bracelets/1.json
@@ -106,7 +116,6 @@ class Admin::BraceletsController < Admin::AdminController
       if !@current_color
           @current_color = Color.first
       end
-
     end
 
     def set_bracelet

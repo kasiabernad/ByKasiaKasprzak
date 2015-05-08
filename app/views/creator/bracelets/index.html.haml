@@ -1,51 +1,52 @@
-- @bracelets.each do |bracelet|
-  - if bracelet.order.present?
-    %h1 Bransoletki zamówione
-    %table
-      %thead
-        %tr
-          %th Clasp
-          %th Casp
-          %th Row count
-          %th Height
-          %th Price
-          %th order
-          %th
-          %th
-          %th
-        %tbody
-          %tr
-            %td= bracelet.clasp
-            %td= bracelet.casp
-            %td= bracelet.row_count
-            %td= bracelet.height
-            %td= bracelet.sum_price
-            %td= bracelet.order.id.to_s
-            %td= link_to 'Show', creator_bracelet_path(bracelet)
-            %td= link_to 'Edit', edit_creator_bracelet_path(bracelet)
-            %td= link_to 'Destroy', creator_bracelet_path(bracelet), :method => :delete, :data => { :confirm => 'Are you sure?' }
-  - else
-    %h1 Drafty
-    %table
-      %thead
-        %tr
-          %th Clasp
-          %th Casp
-          %th Row count
-          %th Height
-          %th Price
-          %th
-          %th
-          %th
-        %tbody
-          %tr
-            %td= bracelet.clasp
-            %td= bracelet.casp
-            %td= bracelet.row_count
-            %td= bracelet.height
-            %td= bracelet.sum_price
-            %td= link_to 'Show', creator_bracelet_path(bracelet)
-            %td= link_to 'Edit', edit_creator_bracelet_path(bracelet)
-            %td= link_to 'Destroy', creator_bracelet_path(bracelet), :method => :delete, :data => { :confirm => 'Are you sure?' }
+%h1 Bransoletki zamówione
+%table
+  %thead
+    %tr
+      %th Clasp
+      %th Casp
+      %th Row count
+      %th Height
+      %th Price
+      %th order
+      %th
+      %th
+      %th
+    %tbody
+    - @bracelets_with_order.each do |bracelet|
+      %tr
+        %td= bracelet.clasp
+        %td= bracelet.casp
+        %td= bracelet.row_count
+        %td= bracelet.height
+        %td= bracelet.price
+        %td= bracelet.order.id.to_s
+        %td= link_to 'Show', creator_bracelet_path(bracelet)
+        %td= link_to 'Edit', edit_creator_bracelet_path(bracelet)
+        %td= link_to 'Destroy', creator_bracelet_path(bracelet), :method => :delete, :data => { :confirm => 'Are you sure?' }
+%h1 Bransoletki niezamówione
+%table
+  %thead
+    %tr
+      %th Clasp
+      %th Casp
+      %th Row count
+      %th Height
+      %th Price
+      %th
+      %th
+      %th
+      %th
+    %tbody
+    - @bracelets_without_order.each do |bracelet|
+      %tr
+        %td= bracelet.clasp
+        %td= bracelet.casp
+        %td= bracelet.row_count
+        %td= bracelet.height
+        %td= number_to_currency bracelet.sum_price
+        %td= render "bracelet_row", bracelet: bracelet, order_item: @order_item
+        %td= link_to 'Show', creator_bracelet_path(bracelet)
+        %td= link_to 'Edit', edit_creator_bracelet_path(bracelet)
+        %td= link_to 'Destroy', creator_bracelet_path(bracelet), :method => :delete, :data => { :confirm => 'Are you sure?' }
 %br
 = link_to 'New Bracelet', new_creator_bracelet_path

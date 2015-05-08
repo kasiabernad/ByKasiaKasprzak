@@ -9,6 +9,9 @@ class Creator::BraceletsController < Creator::CreatorController
   
   def index
     @bracelets = Bracelet.where(user_id: current_user.id)
+    @bracelets_with_order = @bracelets.reject { |b| b.order.blank? }
+    @bracelets_without_order = @bracelets.reject { |b| b.order.present? }
+    @order_item = current_order.order_items.new
   end
 
   # GET /bracelets/1

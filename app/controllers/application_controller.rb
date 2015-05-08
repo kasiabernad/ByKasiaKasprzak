@@ -4,9 +4,17 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
   before_action :configure_permitted_parameters, if: :devise_controller?
   before_action :set_locale
- 
+  helper_method :current_order
   def set_locale
     I18n.locale = params[:locale] || I18n.default_locale
+  end
+  
+  def current_order
+      if !session[:order_id].nil?
+        Order.find(session[:order_id])
+      else
+        Order.new
+      end
   end
   
   protected  

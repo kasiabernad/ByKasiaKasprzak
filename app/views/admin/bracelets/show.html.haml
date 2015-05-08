@@ -21,7 +21,6 @@
   %table
     - hash = @bracelet.pattern
     - hash.keys.sort.each do |key|
-      - binding.pry
       - value = hash[key]
       %tr
         %td.admin-small{style:"background-color:##{value['color'].hex};"}

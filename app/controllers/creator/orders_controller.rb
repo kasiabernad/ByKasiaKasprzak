@@ -10,7 +10,14 @@ class Creator::OrdersController < Creator::CreatorController
   # GET /orders/1
   # GET /orders/1.json
   def show
+    @order_items = @order.order_items
   end
+  
+  # def change_order_status order
+  #   @current_order_status = current_order.order_status
+  #   new_order_status_id = @current_order_status.id.to_i + 1
+  #   return new_order_status_id
+  # end
 
   # GET /orders/new
   def new
@@ -42,7 +49,7 @@ class Creator::OrdersController < Creator::CreatorController
   def update
     respond_to do |format|
       if @order.update(order_params)
-        format.html { redirect_to creator_order_path(@order), notice: 'Order was successfully updated.' }
+        format.html { redirect_to creator_orders_path, notice: 'Order was successfully updated.' }
         format.json { render :show, status: :ok, location: creator_order_path(@order) }
       else
         format.html { render :edit }
@@ -69,6 +76,6 @@ class Creator::OrdersController < Creator::CreatorController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def order_params
-      params.require(:order).permit(:bracelet_id, :price)
+      params.require(:order).permit(:bracelet_id, :price, :order_status_id)
     end
 end

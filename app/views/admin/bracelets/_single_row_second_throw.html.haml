@@ -5,5 +5,5 @@
     - can = @color_positions.last
   - @color_positions.each do |x|
     - cla = can == x ? 'small' : 'normal'
-    %td{onclick:"changeColor(#{x.id})", id: "cp-#{x.id}", style:"background-color:##{x.color.hex};", class: "cp-row-#{@row_index} #{cla}"}
+    %td{onclick:"adchangeColor(#{x.id})", id: "cp-#{x.id}", style:"background-color:##{x.color.hex};", class: "cp-row-#{@row_index} #{cla}"}
       - x.position
