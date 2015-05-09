@@ -18,10 +18,10 @@
   %span{:style => "color: green"}= number_to_currency order_item.total_price
   %br
   %hr
-- if current_order.order_status == 1
-  = form_for [:creator, @order] do |f|
-    = f.hidden_field :order_status_id, :value => 2
-    .actions
-      = f.submit 'ZŁóż zamówienie'
+/ - if current_order.order_status == 1
+= form_for [:creator, @order] do |f|
+  = f.hidden_field :order_status_id, :value => 2
+  .actions
+    = f.submit 'ZŁóż zamówienie'
 
   

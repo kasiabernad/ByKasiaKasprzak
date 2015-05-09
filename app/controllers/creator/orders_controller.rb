@@ -47,6 +47,11 @@ class Creator::OrdersController < Creator::CreatorController
   # PATCH/PUT /orders/1
   # PATCH/PUT /orders/1.json
   def update
+    if @order == current_order
+      if current_order.order_status_id < 2
+        session[:order_id] = nil
+      end
+    end
     respond_to do |format|
       if @order.update(order_params)
         format.html { redirect_to creator_orders_path, notice: 'Order was successfully updated.' }
