@@ -40,7 +40,7 @@
           = "wypełnij"
   = render 'first_throw'
   .tools{style:'margin-left:15px;display:table;float:left'}
-    - a = (@bracelet.height * 4.55) - 1
+    - a = @bracelet.rows_for_first_throw
     - (0..a).each do |row_index|
       %table
         %tr

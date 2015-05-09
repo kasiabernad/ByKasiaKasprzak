@@ -29,7 +29,21 @@ class Bracelet < ActiveRecord::Base
     return self.color_positions.slice(idx, number_of_columns)
   
   end
+
   
+  def rows_for_first_throw
+    counter = 0
+    (0..100).each do |i|
+      if positions_in_first_look_for_iteration(i).blank?
+        break
+      else
+        counter = counter + 1
+        
+      end
+    end
+
+    return counter - 1
+  end
   
   def positions_in_second_look_for_iteration iteration
     x = row_count % 2? row_count + 2 : rown_count + 1

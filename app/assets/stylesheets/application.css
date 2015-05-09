@@ -16,11 +16,12 @@
 td,tr,table,div{
     padding:1;
     margin:0;
+    border-spacing: 0;
   }
 /* Class of TD */
 td{
-  width: 5px;
-  height: 5px;
+  width: 10px;
+  height: 10px;
   border:1px solid black;
 }
 td.no-border{
@@ -31,7 +32,7 @@ td.no-border{
   
 td.small{
   width:1px;
-  height: 3px;
+  height: 5px;
   border:1px solid black; 
 }
 td.small_second{
@@ -40,12 +41,12 @@ td.small_second{
   border:1px solid black; 
 }
 td.normal_second{
-  width:2px;
+  width:5px;
   height: 3px;
   border:1px solid black; 
 }
 td.admin-small{
-  width:3px;
+  width:5px;
   height: 3px;
   border:1px solid black;
 }
@@ -90,5 +91,8 @@ td.small-no-border{
 @media print {
   body {
     background: #FFF;
+ }
+ #entire_table {
+  padding: 20px;
  }
 
