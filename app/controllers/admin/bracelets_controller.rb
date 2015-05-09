@@ -1,6 +1,6 @@
 class Admin::BraceletsController < Admin::AdminController
-  before_action :set_bracelet, only: [:show, :edit, :update, :destroy]
-  before_action :set_current_color, only: [:pallete, :edit, :change]
+  before_action :set_bracelet, only: [:show, :edit, :update, :destroy, :changerow, :changeentiretable]
+  before_action :set_current_color, only: [:pallete, :edit, :change, :changerow, :changeentiretable]
   before_action :set_color_position, only: [:change]
   # GET /bracelets
   # GET /bracelets.json
@@ -34,6 +34,7 @@ class Admin::BraceletsController < Admin::AdminController
   end
 
   def changerow
+    binding.pry
     @row_index = params[:row_idx].to_i
     
     @color_positions = @bracelet.positions_in_first_look_for_iteration(@row_index)
@@ -119,7 +120,7 @@ class Admin::BraceletsController < Admin::AdminController
     end
 
     def set_bracelet
-      @bracelet = Bracelet.includes(:color_positions).find(params[:id])
+      @bracelet = Bracelet.includes(:color_positions => [:color]).find(params[:id])
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

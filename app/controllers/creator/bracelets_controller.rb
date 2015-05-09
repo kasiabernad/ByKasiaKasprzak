@@ -118,7 +118,7 @@ class Creator::BraceletsController < Creator::CreatorController
     end
 
     def set_bracelet
-      @bracelet = Bracelet.includes(:color_positions).find(params[:id])
+      @bracelet = Bracelet.includes(:color_positions => [:color]).find(params[:id])
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
