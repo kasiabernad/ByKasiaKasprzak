@@ -49,17 +49,24 @@
 
   = render 'second_throw'
   .field
-    = f.input :casp, label: "Wybierz kolor wykończenia bransoletki", collection: ["Srebrne","Złote","Miedziane"]
+    = f.label :Zakończenie
+    = f.select :casp, options_for_select(%w[Srebrne Złote Miedziane]), include_blank: true
   .field
-    = f.input :clasp, label: "Wybierz zapięcie", collection: ["karabińczyk","toogle"]
+    = f.label :Zapięcie
+    = f.select :clasp, options_for_select(%w[karabińczyk toogle]), include_blank: true
   = 'Cena netto'
   = number_to_currency(@bracelet.sum_price)
   = 'Cena brutto'
   = number_to_currency(@bracelet.sum_price * 1.23)
   %br
+  - @bracelet.find_unavailable_colors.each do |f|
+    %br
+    = f
+  %br
+  %br
+  Jeśli zamówisz bransoletkę z niedostępnym kolorem jej okres realizacji znacznie się wydłuży. O dokładnym czasie realizacji powiadomimy w osobnym mailu. Jeśli nie chcesz czekać, zmień niedostępny kolor na któryś z dostępnych kolorów
   %button 
     = link_to "Przelicz cenę", edit_creator_bracelet_path(@bracelet), :method => :get
   %br
   .actions
-    = f.submit 'Zapisz i złóż zamówienie później'
-/ = form_for
+    = f.submit 'Podsumuj bransoletkę'

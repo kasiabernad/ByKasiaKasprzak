@@ -1,5 +1,7 @@
 class Creator::UsersController < Creator::CreatorController
   before_action :set_user, only: [:show, :edit, :update, :destroy]
+  
+
   #
   # # GET /users
   # # GET /users.json
@@ -22,21 +24,21 @@ class Creator::UsersController < Creator::CreatorController
   def edit
   end
  #
- #  # POST /users
- #  # POST /users.json
- #  def create
- #    @user = User.new(user_params)
- #
- #    respond_to do |format|
- #      if @user.save
- #        format.html { redirect_to creator_user_path(@user), notice: 'User was successfully created.' }
- #        format.json { render :show, status: :created, location: creator_user_path(@user) }
- #      else
- #        format.html { render :new }
- #        format.json { render json: creator_user_path(@user).errors, status: :unprocessable_entity }
- #      end
- #    end
- #  end
+  # POST /users
+  # POST /users.json
+  def create
+    @user = User.new(user_params)
+
+    respond_to do |format|
+      if @user.save
+        format.html { redirect_to creator_user_path(@user), notice: 'User was successfully created.' }
+        format.json { render :show, status: :created, location: creator_user_path(@user) }
+      else
+        format.html { render :new }
+        format.json { render json: creator_user_path(@user).errors, status: :unprocessable_entity }
+      end
+    end
+  end
  #
   # PATCH/PUT /users/1
   # PATCH/PUT /users/1.json

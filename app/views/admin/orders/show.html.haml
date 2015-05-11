@@ -1,12 +1,28 @@
-%p#notice= notice
-
-%p
-  %b Bracelet:
-  = @order.bracelet_id
-%p
-  %b Price:
-  = @order.price
-
-= link_to 'Edit', edit_admin_order_path(@order)
-\|
-= link_to 'Back', admin_orders_path
+%br
+Łączna cena zamówienia:
+%span{:style => "color: green"}= number_to_currency @order.subtotal
+%br
+= @order.order_status.name
+%hr
+%hr
+- @order.order_items.each do |order_item|
+  Bransoletka nr
+  = order_item.bracelet.id.to_i
+  = link_to 'zobacz', admin_bracelet_path(order_item.bracelet)
+  %br
+  Cena za jedną szt.
+  = number_to_currency order_item.unit_price
+  %br
+  Ilość
+  = order_item.quantity.to_i
+  %br
+  Cena łączna
+  %span{:style => "color: green"}= number_to_currency order_item.total_price
+  %br
+  %hr
+= link_to 'Złóż zamówienie później', admin_orders_path
+= form_for [:admin, @order] do |f|
+  = f.hidden_field :order_status_id, :value => 2
+  .actions
+    = f.submit 'ZŁóż zamówienie'
+    

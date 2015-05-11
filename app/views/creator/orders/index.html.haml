@@ -6,6 +6,7 @@
       %th Order id
       %th Price
       %th Status
+      %th User
       %th
       %th
 
@@ -15,9 +16,9 @@
         %td= order.id
         %td= order.subtotal
         %td= order.order_status.name
+        %td= order.user_id
         %td= link_to 'Show', creator_order_path(order)
         %td= link_to 'Edit', edit_creator_order_path(order)
-        %td= link_to 'Destroy', creator_order_path(order), :method => :delete, :data => { :confirm => 'Are you sure?' }
 
 %br
 

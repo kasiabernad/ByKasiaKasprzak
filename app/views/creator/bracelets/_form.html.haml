@@ -7,11 +7,11 @@
           %li= msg
 
   .field
-    = f.label :row_count
-    = f.number_field :row_count
+    = f.label :grubość_bransoletki
+    = f.select :row_count, options_for_select(%w[6 7 8 9 10 11 12 13 14 15])
   .field
-    = 'Standardowa długość bransoletki to 17 cm (dodatkowe 2 cm doda zapięcie). Łącznie z zapięciem standarodwa bransoletka ma długość 19 cm Przy wyborze długości poniżej proszę podawać długość bez zapięcia!'
-    = f.label :height
-    = f.number_field :height
+    = 'Długość bransoletki liczona jest jako obwód nadgartka + 2 cm. Zapięcie w formie karabińczyka pozwala na regulowanie długości. W celu ustalenia niestandardowej długości bransoletki prosimy o kontakt mailowy'
+    = f.select :height,options_for_select(%w[19 15 22])
+    = f.hidden_field :collection_id, value: current_user.collection.id
   .actions
     = f.submit 'Save'

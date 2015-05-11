@@ -20,6 +20,6 @@ class Creator::OrderItemsController < Creator::CreatorController
     @order_items = @order.order_items
   end
   def order_item_params
-      params.require(:order_item).permit(:quantity, :bracelet_id)
+      params.require(:order_item).permit(:quantity, :bracelet_id, :unit_price, :order_id, :total_price)
   end
 end

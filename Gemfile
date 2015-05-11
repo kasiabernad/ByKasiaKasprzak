@@ -29,6 +29,12 @@ gem "haml-rails", "~> 0.9"
 gem 'pry_debug'
 gem 'devise'
 gem 'simple_form'
+gem 'nested_form'
+gem "slim"
+
+group :development, :test do
+    gem 'railroady'
+end
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'

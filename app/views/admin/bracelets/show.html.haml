@@ -3,13 +3,6 @@
   %button{:onclick => "PrintDiv('printable','filename');return false;", class:'hidden-on-print'}
     = "Drukuj"
   %br
-  = 'Bransoletka użytkownika ' + @bracelet.user.first_name
-  %br
-  - if @bracelet.order.present?
-    = 'Zamówienie nr ' + @bracelet.order.id.to_s
-  - else
-    Ta bransoletka nie jest jeszcze zamówiona
-  %br
   Kolory użyte w bransoletce:
   = @colors.count
   %table
@@ -48,9 +41,6 @@
     %br
     Długość bransoletki
     = @bracelet.height.to_s + ' cm'
-    %br
-    Uzytkownik
-    = @bracelet.user.first_name
     %br
     = 'Cena netto'
     = number_to_currency(@bracelet.sum_price)

@@ -47,11 +47,6 @@ class Creator::OrdersController < Creator::CreatorController
   # PATCH/PUT /orders/1
   # PATCH/PUT /orders/1.json
   def update
-    if @order == current_order
-      if current_order.order_status_id < 2
-        session[:order_id] = nil
-      end
-    end
     respond_to do |format|
       if @order.update(order_params)
         format.html { redirect_to creator_orders_path, notice: 'Order was successfully updated.' }
@@ -59,6 +54,19 @@ class Creator::OrdersController < Creator::CreatorController
       else
         format.html { render :edit }
         format.json { render json: creator_order_path(@order).errors, status: :unprocessable_entity }
+      end
+    end
+    
+    @order.bracelets.each do |b|
+      if b.draft == true
+        b.update(draft:false)
+        b.save!
+      end
+    end
+    
+    if @order == current_order
+      if current_order.order_status_id > 1
+        session[:order_id] = nil
       end
     end
   end
@@ -81,6 +89,6 @@ class Creator::OrdersController < Creator::CreatorController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def order_params
-      params.require(:order).permit(:bracelet_id, :price, :order_status_id)
+      params.require(:order).permit(:price, :subtotal, :tax, :shipping, :total, :order_status_id, :user_id)
     end
 end

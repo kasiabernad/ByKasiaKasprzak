@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150507195508) do
+ActiveRecord::Schema.define(version: 20150511152115) do
 
   create_table "admins", force: true do |t|
     t.string   "email",                  default: "", null: false
@@ -40,9 +40,14 @@ ActiveRecord::Schema.define(version: 20150507195508) do
     t.datetime "updated_at"
     t.integer  "height"
     t.integer  "row_count"
+    t.integer  "collection_id"
+    t.boolean  "draft",             default: true
+  end
+
+  create_table "collections", force: true do |t|
     t.integer  "user_id"
-    t.boolean  "draft",             default: false
-    t.integer  "order_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "color_positions", force: true do |t|
@@ -81,7 +86,6 @@ ActiveRecord::Schema.define(version: 20150507195508) do
   end
 
   create_table "orders", force: true do |t|
-    t.integer  "bracelet_id"
     t.integer  "price"
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -90,6 +94,7 @@ ActiveRecord::Schema.define(version: 20150507195508) do
     t.decimal  "shipping"
     t.decimal  "total"
     t.integer  "order_status_id"
+    t.integer  "user_id"
   end
 
   create_table "row_numbers", force: true do |t|

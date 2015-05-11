@@ -2,9 +2,7 @@ class Bracelet < ActiveRecord::Base
   has_many :color_positions
   has_many :order_items
   has_many :colors, through: :color_positions
-  has_one :row_number
-  has_one :order
-  belongs_to :user
+  belongs_to :collection
   after_create :create_color_positions
   validates :height, :inclusion => { :in => 5..25, :message => "The height must be between 5 and 25" }
   validates :row_count, :inclusion => { :in => 5..15, :message => "The height must be between 5 and 15" }
@@ -20,6 +18,12 @@ class Bracelet < ActiveRecord::Base
     end 
   end
   
+  # def set_collection
+  #     if self.collection.nil?
+  #       self.collection = user.collection
+  #     end
+  # end
+
   def positions_in_first_look_for_iteration iteration
     row_width = row_count
     number_of_columns = (iteration % 2) == 0 ? row_width : row_width + 1
@@ -37,8 +41,7 @@ class Bracelet < ActiveRecord::Base
       if positions_in_first_look_for_iteration(i).blank?
         break
       else
-        counter = counter + 1
-        
+        counter = counter + 1 
       end
     end
 
@@ -125,6 +128,17 @@ class Bracelet < ActiveRecord::Base
     return self.price + color_price + height_price + width_price
   end
   
+  
+  def find_unavailable_colors
+    result = []
+    self.colors.uniq.each do |color|
+      if color.available == false
+        result.push("Kolor #{color.name} przestał być dostępny")
+      end
+    end
+    return result
+  end
+  
   def pattern
     result = Hash.new
     index = 0
@@ -149,4 +163,9 @@ class Bracelet < ActiveRecord::Base
     
     return result
   end
+
+  private
+    def default_values
+      self.draft ||= true
+    end
 end

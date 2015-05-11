@@ -1,0 +1,7 @@
+= f.simple_fields_for :order_item, OrderItem.new do |order_item|
+	.nested-fields.component-fields
+    = order_item.label "Podaj nazwę składnika:"
+    = order_item.input :quantity, :label => false
+    = order_item.label "Wybierz produkty dla składnika:"
+    br
+    br

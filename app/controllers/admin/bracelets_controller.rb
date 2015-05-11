@@ -8,8 +8,6 @@ class Admin::BraceletsController < Admin::AdminController
   
   def index
     @bracelets = Bracelet.all
-    @bracelets_with_order = @bracelets.reject { |b| b.order.blank? }
-    @bracelets_without_order = @bracelets.reject { |b| b.order.present? }
   end
 
   # GET /bracelets/1
@@ -34,7 +32,6 @@ class Admin::BraceletsController < Admin::AdminController
   end
 
   def changerow
-    binding.pry
     @row_index = params[:row_idx].to_i
     
     @color_positions = @bracelet.positions_in_first_look_for_iteration(@row_index)
@@ -125,6 +122,6 @@ class Admin::BraceletsController < Admin::AdminController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def bracelet_params
-      params.require(:bracelet).permit(:clasp, :casp, :color_position_id, :row_count, :price, :height, :user_id)
+      params.require(:bracelet).permit(:clasp, :casp, :color_position_id, :row_count, :price, :height, :draft, :collection_id)
     end
 end

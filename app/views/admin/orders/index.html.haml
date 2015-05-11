@@ -3,20 +3,26 @@
 %table
   %thead
     %tr
-      %th Bracelet
+      %th Order id
       %th Price
-      %th
-      %th
+      %th Status
+      %th User id
       %th
 
   %tbody
     - @orders.each do |order|
       %tr
-        %td= order.bracelet_id
-        %td= order.price
+        %td= order.id
+        %td= order.subtotal
+        %td= order.order_status.name
+        %td= order.user_id
+        - if order.check_if_unless_one_color_is_unavailable == false
+          %td
+            = '!'
+        - else
+          %td
         %td= link_to 'Show', admin_order_path(order)
-        %td= link_to 'Edit', edit_admin_order_path(order)
-        %td= link_to 'Destroy', admin_order_path(order), :method => :delete, :data => { :confirm => 'Are you sure?' }
+        %td= link_to 'Anuluj zamówienie', admin_order_path(order), :method => :delete, :data => { :confirm => 'Are you sure?' }
 
 %br
 

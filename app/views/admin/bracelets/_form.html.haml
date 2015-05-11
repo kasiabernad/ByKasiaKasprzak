@@ -15,6 +15,5 @@
   .field
     = f.label "Wybierz Użytkownika"
     %br/
-    = f.association :user, label_method: :first_name, collection: User.all, prompt: "Wybierz użytkownika"
   .actions
     = f.submit 'Save'

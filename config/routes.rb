@@ -1,6 +1,4 @@
 Rails.application.routes.draw do
-
-
   devise_for :admins, :controllers => { registrations: 'admin/registrations' }
   devise_for :users, :controllers => { registrations: 'creator/registrations' }
 
@@ -15,6 +13,7 @@ Rails.application.routes.draw do
     resources :admins
     resources :orders
     resources :colors
+    resources :collections
     resources :color_positions
     resources :bracelets do
       collection do
@@ -35,6 +34,7 @@ Rails.application.routes.draw do
     resources :users
     resources :orders
     resources :order_status
+    resources :collections
     resources :colors, only: [:show, :index]
     resources :color_positions
     resources :order_items, only: [:create, :update, :destroy] do
@@ -49,6 +49,7 @@ Rails.application.routes.draw do
         get 'change'
         get 'changerow'
         get 'changeentiretable'
+        get 'draft_list'
       end
     end
   end

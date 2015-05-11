@@ -1,12 +1,17 @@
 Łączna cena zamówienia:
-%span{:style => "color: green"}= number_to_currency current_order.subtotal
+%span{:style => "color: green"}= number_to_currency @order.subtotal
 %br
-= current_order.order_status.name
+= @order.order_status.name
 %hr
 %hr
 - @order_items.each do |order_item|
   Bransoletka nr
   = order_item.bracelet.id.to_i
+  %br
+  - order_item.bracelet.find_unavailable_colors.each do |f|
+    %br
+    = f
+  %br
   %br
   Cena za jedną szt.
   = number_to_currency order_item.unit_price
@@ -18,10 +23,15 @@
   %span{:style => "color: green"}= number_to_currency order_item.total_price
   %br
   %hr
-/ - if current_order.order_status == 1
+Jeśli zamówisz bransoletkę z niedostępnym kolorem jej okres realizacji znacznie się wydłuży. O dokładnym czasie realizacji powiadomimy w osobnym mailu. Jeśli nie chcesz czekać, zmień niedostępny kolor na któryś z dostępnych kolorów
+%br
+= link_to 'Złóż zamówienie później', creator_orders_path
+%br
+= link_to 'edytuj zawartość koszyka', creator_carts_show_path
 = form_for [:creator, @order] do |f|
   = f.hidden_field :order_status_id, :value => 2
   .actions
     = f.submit 'ZŁóż zamówienie'
+    
 
   

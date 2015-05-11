@@ -1,0 +1,12 @@
+%p#notice= notice
+
+%p
+  %b Bracelet:
+  = @collection.bracelet_id
+%p
+  %b User:
+  = @collection.user_id
+
+= link_to 'Edit', edit_collection_path(@collection)
+\|
+= link_to 'Back', collections_path
