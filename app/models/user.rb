@@ -3,6 +3,10 @@ class User < ActiveRecord::Base
   has_many :orders
   has_one :collection
   after_create :set_collection
+  composed_of :address, :class_name => "Address",
+                        :mapping => [%w(street_address street_address),
+                                     %w(city city),
+                                     %w(zip zip)]
   
   
   def set_collection

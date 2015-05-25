@@ -57,6 +57,7 @@
   = 'Cena brutto'
   = number_to_currency(@bracelet.sum_price * 1.23)
   %br
+  = f.input :collection_id, collection: Collection.all
   %button 
     = link_to "Przelicz cenę", edit_admin_bracelet_path(@bracelet), :method => :get
   %br

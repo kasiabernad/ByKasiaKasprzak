@@ -4,6 +4,9 @@ class  Creator::CollectionsController < Creator::CreatorController
   # GET /collections
   # GET /collections.json
   def index
+    @public_collections = Collection.where(public: true)
+    @my_collection = Collection.where(user_id: current_user)
+    @collections = @public_collections.to_a + @my_collection.to_a
   end
 
   # GET /collections/1

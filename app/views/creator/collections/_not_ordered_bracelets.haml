@@ -1,0 +1,30 @@
+%h1 Bransoletki Niezamówione
+%table
+  %thead
+    %tr
+      %th Id
+      %th Zakończenie
+      %th Zapięcie
+      %th Grubość
+      %th Długość
+      %th Zamówiona
+      %th Cena
+      %th
+      %th
+  %tbody
+    - @bracelets.each do |bracelet|
+      - if bracelet.draft == true
+        %tr
+          %td= bracelet.id
+          %td= bracelet.clasp
+          %td= bracelet.casp
+          %td= bracelet.row_count
+          %td= bracelet.height
+          %td
+            - if bracelet.draft == true
+              = 'Nie'
+            - else
+              = 'Tak'
+          %td= number_to_currency bracelet.sum_price
+          %td= link_to 'Edit', edit_creator_bracelet_path(bracelet)
+          %td= render "bracelet_row", bracelet: bracelet, order_item: @order_item

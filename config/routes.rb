@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
   devise_for :admins, :controllers => { registrations: 'admin/registrations' }
   devise_for :users, :controllers => { registrations: 'creator/registrations' }
-
+  
   get 'welcome/index'
   root 'welcome#index'
 

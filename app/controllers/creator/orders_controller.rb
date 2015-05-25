@@ -12,12 +12,6 @@ class Creator::OrdersController < Creator::CreatorController
   def show
     @order_items = @order.order_items
   end
-  
-  # def change_order_status order
-  #   @current_order_status = current_order.order_status
-  #   new_order_status_id = @current_order_status.id.to_i + 1
-  #   return new_order_status_id
-  # end
 
   # GET /orders/new
   def new

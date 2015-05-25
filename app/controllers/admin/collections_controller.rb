@@ -1,4 +1,4 @@
-class Admin::CollectionsController < Admin::CreatorController
+class Admin::CollectionsController < Admin::AdminController
   before_action :set_collection, only: [:show, :edit, :update, :destroy]
 
   # GET /collections
@@ -10,6 +10,7 @@ class Admin::CollectionsController < Admin::CreatorController
   # GET /collections/1
   # GET /collections/1.json
   def show
+    @bracelets = @collection.bracelets
   end
 
   # GET /collections/new

@@ -13,6 +13,8 @@
     = f
   %br
   %br
+  = link_to 'Edytuj', edit_creator_bracelet_path(order_item.bracelet)
+  %br
   Cena za jedną szt.
   = number_to_currency order_item.unit_price
   %br
@@ -25,9 +27,14 @@
   %hr
 Jeśli zamówisz bransoletkę z niedostępnym kolorem jej okres realizacji znacznie się wydłuży. O dokładnym czasie realizacji powiadomimy w osobnym mailu. Jeśli nie chcesz czekać, zmień niedostępny kolor na któryś z dostępnych kolorów
 %br
+%hr
+%h5 Dane do wysyłki
+
+%hr
 = link_to 'Złóż zamówienie później', creator_orders_path
 %br
-= link_to 'edytuj zawartość koszyka', creator_carts_show_path
+- if @order.order_status.id < 2
+  = link_to 'edytuj zawartość koszyka', creator_carts_show_path
 = form_for [:creator, @order] do |f|
   = f.hidden_field :order_status_id, :value => 2
   .actions
