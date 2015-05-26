@@ -1,5 +1,7 @@
 %p#notice= notice
-.panel        
+.panel
+  Duplikuj
+  = link_to "copy", copy_creator_bracelet_path(params[:id])   
   %br
   Zapięcie:
   = @bracelet.clasp

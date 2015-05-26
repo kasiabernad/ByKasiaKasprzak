@@ -32,7 +32,12 @@ Rails.application.routes.draw do
     get 'carts/show'
     post 'orders/change_order_status'
     resources :users
-    resources :orders
+    resources :orders do
+      collection do
+        get 'show_shipping_address'
+        get 'edit_shipping_address'
+      end
+    end
     resources :order_status
     resources :collections
     resources :colors, only: [:show, :index]
@@ -44,7 +49,11 @@ Rails.application.routes.draw do
       end
     end
     resources :bracelets do
+      member do
+        get 'copy'
+      end
       collection do
+        get 'update_sum_price'
         get 'pallete'
         get 'change'
         get 'changerow'

@@ -25,6 +25,7 @@ class  Creator::CollectionsController < Creator::CreatorController
   def edit
   end
 
+
   # POST /collections
   # POST /collections.json
   def create

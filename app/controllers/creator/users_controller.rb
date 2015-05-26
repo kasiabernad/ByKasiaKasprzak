@@ -28,7 +28,6 @@ class Creator::UsersController < Creator::CreatorController
   # POST /users.json
   def create
     @user = User.new(user_params)
-
     respond_to do |format|
       if @user.save
         format.html { redirect_to creator_user_path(@user), notice: 'User was successfully created.' }
@@ -43,14 +42,15 @@ class Creator::UsersController < Creator::CreatorController
   # PATCH/PUT /users/1
   # PATCH/PUT /users/1.json
   def update
-    binding.pry
     respond_to do |format|
       if @user.update(user_params)
-        format.html { redirect_to creator_user_path(@user), notice: 'User was successfully updated.' }
+        format.html { redirect_to :back, notice: 'User was successfully updated.' }
         format.json { render :show, status: :ok, location: creator_user_path(@user) }
+        format.js { render :show, status: :ok, location: creator_user_path(@user)}
       else
         format.html { render :edit }
         format.json { render json: creator_user_path(@user).errors, status: :unprocessable_entity }
+        format.js {render :edit, status: :unprocessable_entity}
       end
     end
   end
@@ -73,6 +73,6 @@ class Creator::UsersController < Creator::CreatorController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def user_params
-      params.require(:user).permit(:first_name, :admin)
+      params.require(:user).permit(:first_name, :last_name, :email, :password, :password_confirmation, :current_password, :street_address, :city, :zip, :shipping_street_address, :shipping_city, :shipping_zip)
     end
 end

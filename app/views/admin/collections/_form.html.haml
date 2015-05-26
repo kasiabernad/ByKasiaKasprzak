@@ -1,9 +1,6 @@
-= simple_form_for(@collection) do |f|
-  = f.error_notification
-
+= form_for [:admin, @collection] do |f|
   .form-inputs
     = f.input :bracelet_id
     = f.input :user_id
-
   .form-actions
     = f.button :submit

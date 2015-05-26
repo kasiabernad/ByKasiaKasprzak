@@ -31,6 +31,7 @@ gem 'devise'
 gem 'simple_form'
 gem 'nested_form'
 gem "slim"
+gem 'deep_cloneable', '~> 2.1.1'
 
 group :development, :test do
     gem 'railroady'

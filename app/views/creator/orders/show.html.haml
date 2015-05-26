@@ -28,9 +28,9 @@
 Jeśli zamówisz bransoletkę z niedostępnym kolorem jej okres realizacji znacznie się wydłuży. O dokładnym czasie realizacji powiadomimy w osobnym mailu. Jeśli nie chcesz czekać, zmień niedostępny kolor na któryś z dostępnych kolorów
 %br
 %hr
-%h5 Dane do wysyłki
-
-%hr
+= link_to 'edytuj adres', edit_shipping_address_creator_orders_path(user_id: @user), remote:true
+= render :partial => 'show_shipping_address'
+%br
 = link_to 'Złóż zamówienie później', creator_orders_path
 %br
 - if @order.order_status.id < 2

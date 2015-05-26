@@ -9,7 +9,7 @@ class Creator::RegistrationsController < Devise::RegistrationsController
         u.permit(:first_name, :email, :password, :password_confirmation)
       end
       devise_parameter_sanitizer.for(:account_update) do |u|
-        u.permit(:first_name, :email, :password, :password_confirmation, :current_password)
+        u.permit(:first_name, :last_name, :email, :password, :password_confirmation, :current_password, :street_address, :city, :zip, :shipping_street_address, :shipping_city, :shipping_zip)
       end
     end
 end

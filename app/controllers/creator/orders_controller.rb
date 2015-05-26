@@ -11,6 +11,14 @@ class Creator::OrdersController < Creator::CreatorController
   # GET /orders/1.json
   def show
     @order_items = @order.order_items
+    @user = @order.user
+  end
+  
+  def edit_shipping_address
+    @user = User.find(params[:user_id])
+  end
+  def show_shipping_address
+    @user = User.find(params[:user_id])
   end
 
   # GET /orders/new
@@ -83,6 +91,6 @@ class Creator::OrdersController < Creator::CreatorController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def order_params
-      params.require(:order).permit(:price, :subtotal, :tax, :shipping, :total, :order_status_id, :user_id)
+      params.require(:order).permit(:price, :subtotal, :tax, :shipping, :total, :order_status_id, :user_id, user_attributes:[:shipping_street_address, :shipping_zip, :shipping_city])
     end
 end

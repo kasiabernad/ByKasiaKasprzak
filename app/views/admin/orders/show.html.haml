@@ -20,9 +20,4 @@
   %span{:style => "color: green"}= number_to_currency order_item.total_price
   %br
   %hr
-= link_to 'Złóż zamówienie później', admin_orders_path
-= form_for [:admin, @order] do |f|
-  = f.hidden_field :order_status_id, :value => 2
-  .actions
-    = f.submit 'ZŁóż zamówienie'
     

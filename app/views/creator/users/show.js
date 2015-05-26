@@ -1,0 +1,1 @@
+$('#order_address').replaceWith("<%= escape_javascript(render :partial => '/creator/orders/show_shipping_address') %>");

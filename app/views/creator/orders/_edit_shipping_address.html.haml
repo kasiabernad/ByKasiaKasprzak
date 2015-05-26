@@ -1,0 +1,20 @@
+#order_address
+  - if @user.errors.any?
+    #error_explanation
+      %h2= "#{pluralize(@user.errors.count, "error")} prohibited this bracelet from being saved:"
+      %ul
+        - @user.errors.full_messages.each do |msg|
+          %li= msg
+  = nested_form_for [:creator, @user], remote:true  do |user_fields|
+    = user_fields.label :shipping_street_address
+    = user_fields.text_field :shipping_street_address
+    %br
+    = user_fields.label :shipping_zip
+    = user_fields.text_field :shipping_zip
+    %br
+    = user_fields.label :shipping_city
+    = user_fields.text_field :shipping_city
+    %br
+    .actions
+      = user_fields.submit 'Zapisz adres'
+  = link_to 'anuluj', show_shipping_address_creator_orders_path(user_id: @user), remote:true

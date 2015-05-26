@@ -1,6 +1,6 @@
 class Creator::BraceletsController < Creator::CreatorController
   before_action :set_bracelet, only: [:show, :edit, :update, :destroy, :changerow, :changeentiretable]
-  before_action :set_current_color, only: [:pallete, :edit, :change, :changerow, :changeentiretable]
+  before_action :set_current_color, only: [:pallete, :edit, :change, :changerow, :changeentiretable, :copy]
   before_action :set_color_position, only: [:change]
   # GET /bracelets
   # GET /bracelets.json
@@ -15,6 +15,15 @@ class Creator::BraceletsController < Creator::CreatorController
   # GET /bracelets/1.json
   def show
     @colors = @bracelet.colors.uniq
+  end
+  
+  def copy
+    @colors = Color.available
+    @old_bracelet = Bracelet.find(params[:id])
+    @bracelet = @old_bracelet.deep_clone include: :color_positions
+    @bracelet.collection = Collection.find_by(user_id: current_user.id)
+    @bracelet.save!
+    render 'edit'
   end
 
   # GET /bracelets/new
@@ -52,7 +61,9 @@ class Creator::BraceletsController < Creator::CreatorController
     end
     
   end
-
+  def update_sum_price
+    @bracelet = Bracelet.find(params[:bracelet_id])
+  end
   # GET /bracelets/1/edit
   def edit
     @colors = Color.available

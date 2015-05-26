@@ -1,0 +1,14 @@
+#order_address
+  - if !@user.shipping_street_address.present?
+    = @user.street_address
+  - else
+    = @user.shipping_street_address
+  %br
+  - if !@user.shipping_zip.present?
+    = @user.zip
+  - else
+    = @user.shipping_zip
+  - if !@user.shipping_city.present?
+    = @user.city
+  - else
+    = @user.shipping_city

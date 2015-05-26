@@ -2,6 +2,7 @@ class Order < ActiveRecord::Base
   has_many :order_items
   has_many :bracelets, through: :order_items
   belongs_to :user
+  accepts_nested_attributes_for :user
   belongs_to :order_status
   before_create :set_order_status
   before_save :update_subtotal

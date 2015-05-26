@@ -113,3 +113,13 @@ function PrintDiv(name, file) {
  popupWin.document.write('<html><style>td {border: 1px solid;width:10px;height:10px}  .hidden-on-print {visibility: hidden;display: none;}</style><body>' + divToPrint.innerHTML + '</body></html>');
  popupWin.document.close();
 }
+
+$(document).ready(function(){
+	var $form = $('#shipping_address_id');
+  $form.submit(function(){
+     $.post($(this).attr('action'), $(this).serialize(), function(response){
+           // do something here on success
+     },'json');
+     return false;
+  });
+});
