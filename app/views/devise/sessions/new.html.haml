@@ -1,16 +1,38 @@
-%h2 Sign in
 = form_for(resource, as: resource_name, url: session_path(resource_name)) do |f|
-  %div
-    = f.label :email
-    %br/
-    = f.email_field :email, autofocus: true
-  %div
-    = f.label :password
-    %br/
-    = f.password_field :password, autocomplete: "off"
-  - if devise_mapping.rememberable?
-    %div
-      = f.check_box :remember_me
-      = f.label :remember_me
-  %div= f.submit "Zaloguj się"
-= render "devise/shared/links"
+  .login-page
+    .container
+      .account_grid
+        .col-md-6.login-left.wow.fadeInLeft{"data-wow-delay" => "0.4s"}
+          %h3 NOWI UŻYTKOWNICY
+          %p Poprzez założenie konta na naszym serwisie będziesz mógł tworzyć bransoletki BRACEL, korzystać z dostępnych wzorów, składać zamówienia, zarządzać swoim osobistym kontem i wiele więcej.
+          .acount-btn
+            = link_to('Zarejestruj się', new_user_registration_path)
+          %br
+          %br
+        .col-md-6.login-right.wow.fadeInRight{"data-wow-delay" => "0.4s"}
+          %h3 ZAREJESTROWANI UŻYTKOWNICY
+          %p Jeśli jesteś zarejestrowanym użytkownikiem, zaloguj się na swoje konto.
+          %form
+            %div
+              %span
+                Email Address
+                %label *
+              = f.text_field :email, autofocus: true
+            %br
+            %div
+              %span
+                Password
+                %label *
+              = f.password_field :password, autocomplete: "off"
+              %br/
+              %br
+              - if devise_mapping.rememberable?
+                %div
+                  = f.check_box :remember_me
+                  = f.label :zapamiętaj_mnie
+            %input{:type => "submit", :style =>'float:right', :value => "Zaloguj się"}
+            %br
+            %br
+              %a{:href => "#", :style=>'float:right;margin-right: 10%;'} Zapomnniałeś hasła?
+        .clearfix
+  

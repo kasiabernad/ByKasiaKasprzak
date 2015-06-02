@@ -5,9 +5,7 @@
   - @bracelets.each do |bracelet|
     %br
     = bracelet.id
-%p
-  %b User:
-  = @collection.user_id
+    = link_to 'Usuń bransoletkę', admin_bracelet_path(bracelet), :method => :delete, :data => { :confirm => 'Are you sure?' }
 
 = link_to 'Edit', edit_admin_collection_path(@collection)
 \|

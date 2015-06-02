@@ -1,5 +1,25 @@
-%h1 New bracelet
-
-= render 'form'
-
-= link_to 'Back', :back
+.recnt
+  .container
+    .col-md-9
+      .box
+        %h3 Wybierz grubość i długość bransoletki:
+      .box2
+        %img{:alt => "", :src => "assets/1111.png"}/
+        Potrzebujesz pomocy? Zobacz jak korzystać z kreatora bransoletek
+        %img{:alt => "", :src => "assets/1111.png"}/
+      .box2{style:'margin-top:10px'}
+        %p Przykładowe grubości bransoletek:
+        .col-md-3.our-left
+          %i.g6
+          %p 6 w rzędzie
+        .col-md-3.our-left
+          %i.g8
+          %p 8 w rzędzie
+        .col-md-3.our-left
+          %i.g10
+          %p 10 w rzędzie
+        .col-md-3.our-left
+          %i.g15
+          %p 15 w rzędzie
+    = render 'form'
+  

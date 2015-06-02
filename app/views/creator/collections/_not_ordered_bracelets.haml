@@ -11,6 +11,7 @@
       %th Cena
       %th
       %th
+      %th
   %tbody
     - @bracelets.each do |bracelet|
       - if bracelet.draft == true
@@ -27,4 +28,5 @@
               = 'Tak'
           %td= number_to_currency bracelet.sum_price
           %td= link_to 'Edit', edit_creator_bracelet_path(bracelet)
+          %td= link_to 'Destroy', creator_bracelet_path(bracelet), :method => :delete, :data => { :confirm => 'Are you sure?' }
           %td= render "bracelet_row", bracelet: bracelet, order_item: @order_item

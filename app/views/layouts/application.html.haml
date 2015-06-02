@@ -4,15 +4,112 @@
     %meta{:content => "text/html; charset=UTF-8", "http-equiv" => "Content-Type"}/
     %title ByKasiaKasprzak
     = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true
+    = stylesheet_link_tag    'bootstrap', media: 'all', 'data-turbolinks-track' => true
+    = stylesheet_link_tag    'bootstrap_flexslider', media: 'all', 'data-turbolinks-track' => true
+    = stylesheet_link_tag    'bootstrap_style', media: 'all', 'data-turbolinks-track' => true
+    = stylesheet_link_tag    'bootstrap_swipebox', media: 'all', 'data-turbolinks-track' => true
+    %link{:href => "http://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700,800", :rel => "stylesheet", :type => "text/css"}/
     = javascript_include_tag 'application', 'data-turbolinks-track' => true
     = csrf_meta_tags
   %body
-    -if signed_in?
-      - if current_user
-        = render 'creator/devise/menu/user_items'
-      - if admin_signed_in?
-        = render 'admin/devise/menu/admin_user_items'
-    - else
-      - if !current_page? new_admin_session_path && new_admin_registration_path
-        = render 'creator/devise/menu/registration_items'
+    .header
+      .header-top
+        .container
+          .head-right
+            %ul
+              %li
+                %a{:href => "#"}
+                  %img{:alt => "", :src => "assets/flag.jpg"}/
+                  POLSKI
+                  %img{:alt => "", :src => "assets/1111.png"}/
+              .clearfix
+            .clearfix
+      .header-bottom
+        .container
+          .logo
+            %a{:href => "/"}
+              %img.img-responsive{:alt => "", :src => "assets/logo.jpg"}/
+          .head-nav
+            %span.menu
+            %ul.cl-effect-3
+              %li.active
+                %a{:href => "index.html"} PROJEKTUJ
+              %li  
+                -if current_page?(root_path)
+                  #howitworks
+                    %a{:href => "#"} JAK TO DZIAŁA?
+                - else
+                  %a{:href => "/"} JAK TO DZIAŁA?
+              %li
+                %a{:href => " employeers.html"} GALERIA
+              %li
+                %a{:href => " 404.html"} CENY
+              .clearfix
+            :javascript
+              $("#howitworks").click(function() {
+                  $('html,body').animate({
+                      scrollTop: $(".our2").offset().top},
+                      'slow');
+              });
+          -if signed_in?
+            .header-right1
+              %li
+                %img{:alt => "", :src => "assets/icon_user.jpg"}/
+              %li 
+                = link_to('Moje konto', new_user_session_path)
+              %li
+                |
+              %li{:style => 'margin-top:8px'}
+                = link_to('Wyloguj', destroy_admin_session_path, :method => :delete)
+          - else
+            - if !current_page? new_admin_session_path && new_admin_registration_path
+              .header-right1
+                %li
+                  %img{:alt => "", :src => "assets/icon_user.jpg"}/
+                %li 
+                  = link_to('Zaloguj się', new_user_session_path)
+                %li
+                  |
+                %li
+                  = link_to('Zarejestruj się', new_user_registration_path)
+          .clearfix
     = yield
+    .footer-top
+      .container
+        .col-md-4.foo-left
+          %a{:href => "index.html"}
+            %img.img-responsive{:alt => "", :src => "images/logo.png"}/
+          %p Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore. sed diam nonumy eirmod tempor invidunt ut labore. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore.
+        .col-md-4.foo-left
+          %h3 Twitter Update
+          %h6 ABOUT 9 HOURS
+          %p AGOMeet Aldous - a Brave New World for #rails with more cohesion, less coupling and greater dev speed http://t.co/rsekglotzs
+          %h6 ABOUT 1 DAY AGO
+          %p Here's a rare Interview with #graphicdesign legend Massimo Vignelli http://t.co/duxnpoh57z http://t.co/kxO3gPBTo7
+        .col-md-4.foo-left
+          %h3 Useful lnks
+          %ul
+            %li.active
+              %a{:href => "about.html"} About Us
+            %li
+              %a{:href => "#"} Services
+            %li
+              %a{:href => "#"} Work
+            %li
+              %a{:href => "blog.html"} Our Blog
+            %li
+              %a{:href => " 404.html"} Customers Testimonials
+            %li
+              %a{:href => "#"} Affliate
+            %li
+              %a{:href => " contact.html"} Contact Us
+            .clearfix
+        .clearfix
+    / footer-top
+    / footer-bottom
+    .footer-bottom
+      .container
+        %p
+          Copyrights © 2015 Muster All rights reserved | Template by
+          %a{:href => "http://w3layouts.com/"}   W3layouts
+    / footer-bottom

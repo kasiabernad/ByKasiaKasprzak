@@ -1,17 +1,22 @@
-= form_for [:creator, @bracelet] do |f|
-  - if @bracelet.errors.any?
-    #error_explanation
-      %h2= "#{pluralize(@bracelet.errors.count, "error")} prohibited this bracelet from being saved:"
-      %ul
-        - @bracelet.errors.full_messages.each do |msg|
-          %li= msg
-
-  .field
-    = f.label :grubość_bransoletki
-    = f.select :row_count, options_for_select(%w[6 7 8 9 10 11 12 13 14 15])
-  .field
-    = 'Długość bransoletki liczona jest jako obwód nadgartka + 2 cm. Zapięcie w formie karabińczyka pozwala na regulowanie długości. W celu ustalenia niestandardowej długości bransoletki prosimy o kontakt mailowy'
-    = f.select :height,options_for_select(%w[19 15 22])
-    = f.hidden_field :collection_id, value: current_user.collection.id
-  .actions
-    = f.submit 'Save'
+.col-md-3a{style:'margin-left:10px'}
+  .box3
+    = form_for [:creator, @bracelet] do |f|
+      - if @bracelet.errors.any?
+        #error_explanation
+          %h2= "#{pluralize(@bracelet.errors.count, "error")} prohibited this bracelet from being saved:"
+          %ul
+            - @bracelet.errors.full_messages.each do |msg|
+              %li= msg
+      .field
+        Grubość bransoletki:
+        = f.select :row_count, options_for_select(%w[6 8 10 12 14 15])
+      .field
+        Długość bransoletki:
+        = f.select :height,options_for_select(%w[19 15 22])
+        %br/
+        %br
+        %p Długość 19 cm jest standardową długością. 15 cm to rozmiar dziecięcy. 22 cm - bransoletka powiększona. Zapięcie w formie karabińczyka pozwala na regulowanie długości. W celu ustalenia niestandardowej długości bransoletki prosimy o kontakt mailowy.
+      %p
+      = f.hidden_field :collection_id, value: current_user.collection.id
+      = f.submit 'Stwórz bransoletkę', class: 'create-btn'
+      załadowanie strony może chwilę potrwać
