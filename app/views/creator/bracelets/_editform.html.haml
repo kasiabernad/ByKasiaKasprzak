@@ -6,67 +6,81 @@
       %ul
         - @bracelet.errors.full_messages.each do |msg|
           %li= msg
-  %br
-  %br
-  = '1. Wybierz kolor'
-  %br
-  = '2. Wypełnij wszystko klikając na przycisk "wypełnij"(może to potrwać chwilę), wypełnij poszczególne wiersze klikając na ikonki lub wypełnij poszczególne komórki klikając na komórki'
-  %br
-  = '3. Stwórz swój wzór. Jeśli chcesz powtarzalny schemat na bransoletce wykonaj jeden schemat, resztę wzoru pozostaw białym.'
-  %br
-  = '4. Obserwuj zmiany na symulatorze bransoletki'
-  %br
-  = '5. Wybierz końcówki i zapięcie'
-  %br
-  = '6. Podsumuj swój projekt'
-  %br
-  %br
-  = 'Twoja początkowa cena dla wybranej długości i szerokości bransoletki to:'
-  %br
-  = 'Cena netto'
-  = number_to_currency(@bracelet.sum_price)
-  = 'Cena brutto'
-  = number_to_currency(@bracelet.sum_price * 1.23)
-  %br
-  = "Jeśli chcesz zmienić długość i szerokość bransoletki zrób to zanim stworzysz wzór! Jeśli się cofniesz, wszystkie zmiany z tego widoku nie zostaną zapisane."
-  = link_to 'Zmień długość i szerokość bransoletki', new_creator_bracelet_path
-  %br
-  %br
-  = render 'pallete' 
-  %table
-    %tr
-      %td{class: "fill-entire_table", style:'width:150px',onclick:"fillTable(#{@bracelet.id})"}
-        %center
-          = "wypełnij"
-  = render 'first_throw'
-  .tools{style:'margin-left:15px;display:table;float:left'}
-    - a = @bracelet.rows_for_first_throw
-    - (0..a).each do |row_index|
-      %table
-        %tr
-          %td{class: "fill-row-#{row_index}", style:'background-image:url("/assets/stock_bucketfill.png");background-size:cover', onclick:"fillRow(#{row_index}, #{@bracelet.id})"}
-
-
-  = render 'second_throw'
-  .field
-    = f.input :casp, label: "Wybierz kolor wykończenia bransoletki", collection: ["Srebrne","Złote","Miedziane"]
-  .field
-    = f.input :clasp, label: "Wybierz zapięcie", collection: ["karabińczyk","toogle"]
-  
-  %br
-  - @bracelet.find_unavailable_colors.each do |f|
-    %br
-    = f
-  %br
-  %br
-  Jeśli zamówisz bransoletkę z niedostępnym kolorem jej okres realizacji znacznie się wydłuży. O dokładnym czasie realizacji powiadomimy w osobnym mailu. Jeśli nie chcesz czekać, zmień niedostępny kolor na któryś z dostępnych kolorów
-  %button 
-    = link_to "Przelicz cenę", update_sum_price_creator_bracelets_path(bracelet_id: @bracelet), remote:true
-  #update_sum_price
-    = 'Cena netto'
-    = number_to_currency(@bracelet.sum_price)
-    = 'Cena brutto'
-    = number_to_currency(@bracelet.sum_price * 1.23)
-  %br
-  .actions
-    = f.submit 'Podsumuj bransoletkę'
+  .recnt
+    .container
+      .col-md-9
+        .box
+          %h3 Stwórz wzór bransoletki i dobierz wykończenie.
+          .boxp
+            Wybierz kolor oraz zapełnij całą bransoletkę klikając na przycisk "wypełnij" (może to potrwać chwilę), możesz również wypełniać poszczególne wiersze klikając na ikonki lub wypełniać poszczególne komórki klikając na komórki. Po stworzeniu wzoru dobierz końcówki oraz zapięcie. W każdej chwili możesz przeliczyć cenę i sprawdzić ile kosztuje Twój projekt. Więcej informacji na temat cen znajdziesz w zakładce "Ceny".
+        .box2
+          %i.znak{style:'float:left'}
+          %i.ptaszek
+          Potrzebujesz pomocy? Zobacz jak korzystać z kreatora bransoletek
+          %i.ptaszek
+          %i.znak{style:'float:right'}
+        .box4
+          %i.jedynka{style:'float:left'}
+          %table
+            %tr
+              %td{class: "fill-entire_table", style:'width:150px',onclick:"fillTable(#{@bracelet.id})"}
+                %center
+                  = "wypełnij"
+          = render 'first_throw'
+          .tools{style:'margin-left:15px;display:table;float:left'}
+            - a = @bracelet.rows_for_first_throw
+            - (0..a).each do |row_index|
+              %table
+                %tr
+                  %td{class: "fill-row-#{row_index}", style:'background-image:url("/assets/stock_bucketfill.png");background-size:cover', onclick:"fillRow(#{row_index}, #{@bracelet.id})"}
+          = render 'second_throw'
+      .col-md-3a{style:'margin-left:10px'}
+        .box3
+          %i.dwa
+          %br
+          .field
+            A. Zmiana grubości i długości bransoletki
+            %br
+            %br
+            Jeśli chcesz zmienić długość i szerokość bransoletki zrób to zanim stworzysz wzór! Jeśli się cofniesz, wszystkie zmiany z tego widoku nie zostaną zapisane.
+            %br
+            %br
+            %button
+              = link_to 'Zmień długość i szerokość bransoletki', new_creator_bracelet_path
+            %br
+          .field
+            A. Wybierz kolor zakończenia
+            = f.input :casp, collection: ["Srebrne","Złote","Miedziane"]
+          .field
+            B. Wybierz rodzaj zapięcia
+            = f.input :clasp, collection: ["karabińczyk","toogle"]
+          - if @bracelet.find_unavailable_colors.present?
+            .field
+              C. Niedostępne kolory:
+              %br
+              - @bracelet.find_unavailable_colors.each do |f|
+                %br
+                = f
+              Jeśli zamówisz bransoletkę z niedostępnym kolorem jej okres realizacji znacznie się wydłuży. O dokładnym czasie realizacji powiadomimy w osobnym mailu. Jeśli nie chcesz czekać, zmień niedostępny kolor na któryś z dostępnych kolorów
+  .footer-top{style:'background-color:#f0f0f0;padding:2em'}
+    .container
+      %i.jedynka{style:'float:left'}
+      = render 'pallete' 
+      .col-sm-5{style:'float:right'}
+        %i.trojka
+        %button 
+          = link_to "Przelicz cenę", update_sum_price_creator_bracelets_path(bracelet_id: @bracelet), remote:true
+        #update_sum_price
+          = 'Cena netto'
+          = number_to_currency(@bracelet.sum_price)
+          = 'Cena brutto'
+          = number_to_currency(@bracelet.sum_price * 1.23)
+          %br
+      
+        = 'Twoja początkowa cena dla wybranej długości i szerokości bransoletki to:'
+        %br
+        = 'Cena brutto'
+        = number_to_currency(@bracelet.sum_price * 1.23, :precision => 0)
+        %br
+        .actions
+          = f.submit 'Podsumuj bransoletkę'

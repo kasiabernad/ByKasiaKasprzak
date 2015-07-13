@@ -20,6 +20,7 @@ body a{
 .head-nav {
   float: left;
   width: 53.8%;
+  margin-left:20px;
 }
 .head-nav ul{
 	margin:0;
@@ -82,23 +83,86 @@ ul a:focus {
   width: 100%;
   float:left;
 }
-.box h3{
+.boxp{
 	color:#2B394E;
-	font-size: 1.2em;
-	font-weight:600;
+	font-size: 15px;
+  font-family:'Helvetica Neue';
+  text-align: center;
 }
+
 .box2{
   padding: 1em;
   background: #f0f0f0;
   width: 100%;
   float:left;
   text-align: center;
+	color:#2B394E;
+	font-size: 15px;
+	font-weight:500;
 }
+
 .box3{
   padding: 1em;
   background: #f9f9f9;
   width: 100%;
   float:right;
+}
+
+.box4{
+  padding: 1em;
+  background: white;
+  width: 100%;
+  float:left;
+  margin-top:10px;
+}
+i.znak{
+  margin-top:-7px;
+  width: 32px;
+  height: 32px;
+  display: inline-block;
+	background: url(../assets/znak.png)no-repeat 1px 1px;
+}
+i.jedynka{
+  width: 50px;
+  height: 50px;
+  display: inline-block;
+	background: url(../assets/jedynka.png)no-repeat 1px 1px;
+}
+i.dwa{
+  width: 50px;
+  height: 50px;
+  display: inline-block;
+	background: url(../assets/dwa.png)no-repeat 1px 1px;
+}
+i.trojka{
+  width: 50px;
+  height: 50px;
+  display: inline-block;
+	background: url(../assets/trojka.png)no-repeat 1px 1px;
+}
+i.ptaszek{
+  width: 20px;
+  height: 15px;
+  display: inline-block;
+  background: url(../assets/ptaszek.png)no-repeat 1px 7px;
+}
+i.flag{
+  width: 20px;
+  height: 15px;
+  display: inline-block;
+  background: url(../assets/flag.jpg)no-repeat 1px 7px;
+}
+i.logo{
+  width: 180px;
+  height: 50px;
+  display: inline-block;
+  background: url(../assets/logo.jpg)no-repeat 1px 1px;
+}
+i.icon_user{
+  width: 45px;
+  height: 45px;
+  display: inline-block;
+  background: url(../assets/icon_user.jpg)no-repeat 1px 1px;
 }
 .field{
   border-bottom: 1px solid #f0f0f0;
@@ -1110,17 +1174,11 @@ ul#slider4 {
 }
 .header-right1 li {
   display: inline-block;
-  margin-top: -3px;
 }
 .header-right1 li a {
   text-decoration: none;
   color: black;
   font-size: 1.1em;
-  padding: 0.5em;
-  
-/*  background: #2B394E;
-  padding: 0.5em 1em;
-  border-radius: 3px;*/
 }
 .header-right1 li a:hover{
   color: black;
@@ -1130,6 +1188,7 @@ ul#slider4 {
 .header-right1 {
   float: right;
   vertical-align: middle;
+  text-align: center;
 /*  margin: 0.3em 0;*/
 }
 i.bung {
@@ -2512,6 +2571,8 @@ div.register-bottom-grid {
 }
 .footer-top {
   padding: 2em 0;
+  margin-left:auto;
+  margin-right:auto;
 }
 .what {
   min-height: 380px;

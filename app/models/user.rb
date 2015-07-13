@@ -4,7 +4,7 @@ class User < ActiveRecord::Base
   accepts_nested_attributes_for :orders
   has_one :collection
   after_create :set_collection
-  validates :shipping_city, presence: true
+  # validates :shipping_city, presence: true
   composed_of :address, :class_name => "Address",
                         :mapping => [%w(street_address street_address),
                                      %w(city city),

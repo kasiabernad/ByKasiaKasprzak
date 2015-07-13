@@ -19,16 +19,16 @@
             %ul
               %li
                 %a{:href => "#"}
-                  %img{:alt => "", :src => "assets/flag.jpg"}/
+                  %i.flag
                   POLSKI
-                  %img{:alt => "", :src => "assets/1111.png"}/
+                  %i.ptaszek
               .clearfix
             .clearfix
       .header-bottom
         .container
           .logo
             %a{:href => "/"}
-              %img.img-responsive{:alt => "", :src => "assets/logo.jpg"}/
+              %i.logo
           .head-nav
             %span.menu
             %ul.cl-effect-3
@@ -54,18 +54,18 @@
           -if signed_in?
             .header-right1
               %li
-                %img{:alt => "", :src => "assets/icon_user.jpg"}/
+                %i.icon_user
               %li 
                 = link_to('Moje konto', new_user_session_path)
               %li
                 |
-              %li{:style => 'margin-top:8px'}
+              %li
                 = link_to('Wyloguj', destroy_admin_session_path, :method => :delete)
           - else
             - if !current_page? new_admin_session_path && new_admin_registration_path
               .header-right1
                 %li
-                  %img{:alt => "", :src => "assets/icon_user.jpg"}/
+                  %i.icon_user
                 %li 
                   = link_to('Zaloguj się', new_user_session_path)
                 %li

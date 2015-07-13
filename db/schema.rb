@@ -13,6 +13,9 @@
 
 ActiveRecord::Schema.define(version: 20150526071953) do
 
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
   create_table "admins", force: true do |t|
     t.string   "email",                  default: "", null: false
     t.string   "encrypted_password",     default: "", null: false
@@ -28,8 +31,8 @@ ActiveRecord::Schema.define(version: 20150526071953) do
     t.datetime "updated_at"
   end
 
-  add_index "admins", ["email"], name: "index_admins_on_email", unique: true
-  add_index "admins", ["reset_password_token"], name: "index_admins_on_reset_password_token", unique: true
+  add_index "admins", ["email"], name: "index_admins_on_email", unique: true, using: :btree
+  add_index "admins", ["reset_password_token"], name: "index_admins_on_reset_password_token", unique: true, using: :btree
 
   create_table "bracelets", force: true do |t|
     t.string   "clasp"
@@ -79,7 +82,7 @@ ActiveRecord::Schema.define(version: 20150526071953) do
     t.integer  "bracelet_id"
   end
 
-  add_index "order_items", ["order_id"], name: "index_order_items_on_order_id"
+  add_index "order_items", ["order_id"], name: "index_order_items_on_order_id", using: :btree
 
   create_table "order_statuses", force: true do |t|
     t.string   "name"
@@ -97,12 +100,6 @@ ActiveRecord::Schema.define(version: 20150526071953) do
     t.decimal  "total"
     t.integer  "order_status_id"
     t.integer  "user_id"
-  end
-
-  create_table "row_numbers", force: true do |t|
-    t.integer  "row_number"
-    t.datetime "created_at"
-    t.datetime "updated_at"
   end
 
   create_table "users", force: true do |t|
@@ -131,7 +128,7 @@ ActiveRecord::Schema.define(version: 20150526071953) do
     t.string   "shipping_zip"
   end
 
-  add_index "users", ["email"], name: "index_users_on_email", unique: true
-  add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
+  add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
+  add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
 
 end
